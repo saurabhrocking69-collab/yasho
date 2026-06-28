@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact Us — Sppero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#e94560;--dark:#1a1a2e;--dark3:#0f3460;--white:#fff;--gray:#6c757d;--light:#f8f9fa;--border:#e9ecef;--green:#4CAF50}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.logo span{color:var(--red)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--red);color:#fff !important;padding:8px 20px;border-radius:25px;font-weight:700 !important}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+.page-hero{background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:120px 0 60px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(233,69,96,.15),transparent 60%)}
+.page-hero-inner{position:relative;z-index:1}
+.page-tag{display:inline-block;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);color:var(--red);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px}
+.page-title{font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;margin-bottom:14px;letter-spacing:-1.5px}
+.page-sub{font-size:16px;color:rgba(255,255,255,.55);max-width:500px;margin:0 auto}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.contact-section{padding:72px 0 90px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+/* LEFT SIDE */
+.section-label{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.contact-title{font-size:clamp(24px,3vw,36px);font-weight:900;color:var(--dark);margin-bottom:16px;letter-spacing:-1px}
+.contact-intro{font-size:15px;color:var(--gray);line-height:1.75;margin-bottom:36px}
+.contact-card{background:#fff;border:2px solid var(--border);border-radius:18px;padding:22px;margin-bottom:14px;display:flex;align-items:flex-start;gap:16px;transition:all .3s}
+.contact-card:hover{border-color:var(--red);box-shadow:0 8px 24px rgba(233,69,96,.08);transform:translateY(-2px)}
+.cc-icon{width:48px;height:48px;background:rgba(233,69,96,.1);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.cc-title{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.cc-detail{font-size:14px;color:var(--gray);line-height:1.6}
+.cc-detail a{color:var(--red)}
+/* Hours */
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.hours-card{background:var(--light);border-radius:12px;padding:14px;text-align:center}
+.hours-day{font-size:12px;font-weight:600;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.hours-time{font-size:13px;font-weight:800;color:var(--dark)}
+.hours-status{font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:4px;display:inline-block}
+.open{background:#e8f5e9;color:#2e7d32}
+.closed{background:#ffebee;color:#c62828}
+/* RIGHT SIDE — FORM */
+.form-card{background:#fff;border:2px solid var(--border);border-radius:22px;padding:36px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.form-title{font-size:20px;font-weight:800;color:var(--dark);margin-bottom:6px}
+.form-sub{font-size:13px;color:var(--gray);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:12px;font-weight:700;color:var(--dark);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:13px 16px;border:2px solid var(--border);border-radius:12px;
+  font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;
+  background:#fff;color:var(--dark);appearance:none
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(233,69,96,.08)}
+.form-group textarea{height:130px;resize:vertical}
+.btn-submit{
+  width:100%;background:var(--red);color:#fff;border:none;
+  padding:15px 32px;border-radius:12px;font-weight:800;font-size:15px;
+  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;
+  letter-spacing:-.2px
+}
+.btn-submit:hover{background:#d63655;transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,69,96,.4)}
+.btn-submit:active{transform:translateY(0)}
+#success-msg{display:none;background:#e8f5e9;border:2px solid #4CAF50;border-radius:12px;padding:14px 18px;font-size:14px;font-weight:600;color:#2e7d32;margin-top:16px;text-align:center}
+/* FAQ */
+.faq-section{padding:60px 0 80px;background:var(--light)}
+.faq-title{font-size:clamp(24px,3vw,34px);font-weight:900;color:var(--dark);margin-bottom:8px;letter-spacing:-1px}
+.faq-sub{font-size:15px;color:var(--gray);margin-bottom:40px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.faq-item{background:#fff;border:2px solid var(--border);border-radius:16px;overflow:hidden}
+.faq-q{padding:18px 20px;font-size:14px;font-weight:700;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:background .2s}
+.faq-q:hover{background:rgba(233,69,96,.04)}
+.faq-q .arrow{font-size:18px;transition:transform .3s;flex-shrink:0;color:var(--red)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.faq-a p{font-size:13px;color:var(--gray);line-height:1.7;padding-bottom:18px}
+.faq-item.open .faq-a{max-height:200px;padding-top:0}
+.faq-item.open .faq-q .arrow{transform:rotate(45deg)}
+/* FOOTER */
+footer{background:#0a0a1a;padding:40px 0 24px;color:rgba(255,255,255,.4);text-align:center;font-size:13px}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:rgba(255,255,255,.45);transition:color .2s}
+.footer-links a:hover{color:#fff}
+.fl{font-size:20px;font-weight:900;color:#fff;margin-bottom:16px;display:block}
+.fl span{color:var(--red)}
+/* MOBILE */
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .hours-grid{grid-template-columns:repeat(4,1fr)}
+  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:rgba(26,26,46,.98);flex-direction:column;padding:20px 24px;gap:16px;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+}
+@media(max-width:580px){.hours-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Sppero<span>.</span></a>
+    <button class="nav-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="cancellation.html">Cancellation</a></li>
+      <li><a href="index.html#download" class="nav-cta">Download App</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">Support</div>
+    <h1 class="page-title">Contact Us</h1>
+    <p class="page-sub">We're here to help. Reach out anytime and our team responds within 24 hours.</p>
+  </div>
+</div>
+
+<div class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: Contact Info -->
+      <div>
+        <div class="section-label">Get in Touch</div>
+        <h2 class="contact-title">We'd Love to<br>Hear from You</h2>
+        <p class="contact-intro">Whether you're a rider with a question, a driver seeking help, or a business looking to partner — our friendly support team is here for you.</p>
+
+        <div class="contact-card">
+          <div class="cc-icon">📧</div>
+          <div>
+            <div class="cc-title">Email Support</div>
+            <div class="cc-detail">General: <a href="mailto:support@sppero.com">support@sppero.com</a><br>Driver Help: <a href="mailto:driver@sppero.com">driver@sppero.com</a><br>Legal: <a href="mailto:legal@sppero.com">legal@sppero.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="cc-icon">📱</div>
+          <div>
+            <div class="cc-title">In-App Support (Fastest)</div>
+            <div class="cc-detail">Open Sppero App → Menu → Help & Support → New Complaint. Our team responds within 2–4 hours for urgent issues.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="cc-icon">💬</div>
+          <div>
+            <div class="cc-title">WhatsApp Business</div>
+            <div class="cc-detail">Coming soon — WhatsApp support for quick ride queries and driver assistance.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="cc-icon">🏢</div>
+          <div>
+            <div class="cc-title">Headquarters</div>
+            <div class="cc-detail">Sppero Technologies Pvt. Ltd.<br>India<br>📮 Pin: (To be updated)</div>
+          </div>
+        </div>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin:28px 0 14px">Support Hours</h3>
+        <div class="hours-grid">
+          <div class="hours-card"><div class="hours-day">Mon–Fri</div><div class="hours-time">9 AM – 9 PM</div><div class="hours-status open">OPEN</div></div>
+          <div class="hours-card"><div class="hours-day">Saturday</div><div class="hours-time">10 AM – 6 PM</div><div class="hours-status open">OPEN</div></div>
+          <div class="hours-card"><div class="hours-day">Sunday</div><div class="hours-time">Emergency only</div><div class="hours-status closed">LIMITED</div></div>
+          <div class="hours-card"><div class="hours-day">Holidays</div><div class="hours-time">In-App only</div><div class="hours-status closed">LIMITED</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--gray);margin-top:14px">⚡ In-app complaints are monitored 24/7 for safety emergencies. Email response within 24 hours on business days.</p>
+      </div>
+
+      <!-- RIGHT: Contact Form -->
+      <div>
+        <div class="form-card">
+          <div class="form-title">Send Us a Message</div>
+          <div class="form-sub">Fill the form and we'll get back to you within 24 hours.</div>
+
+          <form onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" placeholder="Rahul" required>
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Sharma" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+91 9876543210" required>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="rahul@example.com">
+            </div>
+            <div class="form-group">
+              <label>I am a</label>
+              <select required>
+                <option value="">Select your role</option>
+                <option>Customer (Sppero App User)</option>
+                <option>Driver (Sppero Buddy)</option>
+                <option>New Driver — Want to Join</option>
+                <option>Business / Partnership</option>
+                <option>Media / Press</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select required>
+                <option value="">Select topic</option>
+                <option>Ride Issue / Complaint</option>
+                <option>Payment / Refund</option>
+                <option>Driver Payout Issue</option>
+                <option>Account Access Problem</option>
+                <option>Cancellation Dispute</option>
+                <option>App Bug / Technical Issue</option>
+                <option>Driver Verification Help</option>
+                <option>Business Partnership</option>
+                <option>General Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Describe your issue or question in detail. Include ride ID, date, and any relevant details to help us assist you faster..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">🚀 Send Message</button>
+            <div id="success-msg">✅ Message sent! We'll reply to your email within 24 hours.</div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="container">
+    <div class="section-label">Common Questions</div>
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <p class="faq-sub">Quick answers to the most common questions from riders and drivers.</p>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I book a ride on Sppero? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Download the Sppero app, register with your phone number, enter your pickup and drop location, choose your vehicle type, and confirm the booking. A nearby driver is matched instantly and you can track them live.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What payment methods does Sppero accept? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Sppero accepts cash, UPI/direct payment, online payment via Razorpay, and Sppero Wallet (prepaid balance). You can choose your preferred method before confirming a booking.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I join as a Sppero Buddy driver? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Download the Sppero Buddy app, register with your phone number, and upload your driving licence, vehicle RC, insurance, and a selfie. Our team verifies documents within 24 hours and you can start accepting rides.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">When do I get my referral bonus? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Referral rewards are credited to both you and your friend only after your friend completes their first ride on Sppero. Simply sharing the code or registration is not enough — the first ride must be completed.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How does the driver payout work? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Earnings are credited to your Sppero Buddy wallet after every completed ride. You can request a payout to your bank account or UPI ID from the app. Sppero processes payouts automatically via Razorpay, typically within a few hours.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there a cancellation fee? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Cancellation is free within 2 minutes of booking or before a driver is assigned. After that, a fee of ₹25–₹50 applies depending on how far the driver has traveled. See our full Cancellation Policy for details.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is Sppero Wallet cashback? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>When you pay for rides using your Sppero Wallet balance, you earn automatic cashback on every transaction. The cashback is added directly back to your wallet and can be used for future rides.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I report a safety issue? <span class="arrow">+</span></div>
+        <div class="faq-a"><p>Open the Sppero app, go to the completed ride, and tap "Report Issue". Select the appropriate category. For urgent safety emergencies, use the SOS button available during active rides. Our safety team reviews all reports within 24 hours.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:900px;margin:0 auto;padding:0 24px">
+    <span class="fl">Sppero<span>.</span></span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cancellation.html">Cancellation</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>© 2025 Sppero · Made with ❤️ in India</p>
+  </div>
+</footer>
+
+<script>
+function submitForm(e){
+  e.preventDefault();
+  const btn=document.querySelector('.btn-submit');
+  btn.textContent='Sending...';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('success-msg').style.display='block';
+    btn.textContent='✅ Sent!';
+    btn.style.background='#4CAF50';
+    e.target.reset();
+    setTimeout(()=>{btn.textContent='🚀 Send Message';btn.disabled=false;btn.style.background='';document.getElementById('success-msg').style.display='none';},4000);
+  },1200);
+}
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+</body>
+</html>

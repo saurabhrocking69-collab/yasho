@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Privacy Policy — Sppero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#e94560;--dark:#1a1a2e;--dark3:#0f3460;--white:#fff;--gray:#6c757d;--light:#f8f9fa;--border:#e9ecef}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.logo span{color:var(--red)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--red);color:#fff !important;padding:8px 20px;border-radius:25px;font-weight:700 !important}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+.page-hero{background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:120px 0 60px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(233,69,96,.15),transparent 60%)}
+.page-hero-inner{position:relative;z-index:1}
+.page-tag{display:inline-block;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);color:var(--red);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px}
+.page-title{font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;margin-bottom:14px;letter-spacing:-1.5px}
+.page-sub{font-size:16px;color:rgba(255,255,255,.55);max-width:500px;margin:0 auto}
+.container{max-width:820px;margin:0 auto;padding:0 24px}
+.content{padding:64px 0 80px}
+.policy-date{font-size:13px;color:var(--gray);margin-bottom:36px;padding-bottom:20px;border-bottom:2px solid var(--border)}
+h2{font-size:22px;font-weight:800;color:var(--dark);margin:40px 0 14px;letter-spacing:-.5px}
+h3{font-size:17px;font-weight:700;color:var(--dark);margin:24px 0 10px}
+p{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:14px}
+ul{margin:10px 0 20px 20px}
+ul li{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:6px;list-style:disc}
+.info-box{background:linear-gradient(135deg,rgba(233,69,96,.06),rgba(15,52,96,.04));border-left:4px solid var(--red);border-radius:0 12px 12px 0;padding:16px 20px;margin:22px 0;font-size:14px;color:var(--dark);line-height:1.7}
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;border-radius:12px;overflow:hidden;border:2px solid var(--border);font-size:14px}
+.data-table th{background:var(--dark);color:#fff;padding:13px 16px;font-weight:700;text-align:left}
+.data-table td{padding:12px 16px;color:var(--gray);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--light)}
+footer{background:#0a0a1a;padding:40px 0 24px;color:rgba(255,255,255,.4);text-align:center;font-size:13px}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:rgba(255,255,255,.45);transition:color .2s}
+.footer-links a:hover{color:#fff}
+.fl{font-size:20px;font-weight:900;color:#fff;margin-bottom:16px;display:block}
+.fl span{color:var(--red)}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:rgba(26,26,46,.98);flex-direction:column;padding:20px 24px;gap:16px;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Sppero<span>.</span></a>
+    <button class="nav-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="cancellation.html">Cancellation</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html#download" class="nav-cta">Download App</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="page-sub">How Sppero collects, uses, and protects your personal information.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="content">
+    <div class="policy-date">Last Updated: June 2025 &nbsp;·&nbsp; Effective: June 1, 2025</div>
+
+    <p>Sppero ("we", "our", "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, share, and protect your personal information when you use the Sppero or Sppero Buddy mobile applications and related services ("Platform").</p>
+
+    <div class="info-box">🔒 <strong>Your privacy matters to us.</strong> We collect only what is necessary to provide our services and never sell your personal data to third parties for advertising purposes.</div>
+
+    <h2>1. Information We Collect</h2>
+
+    <h3>Information You Provide</h3>
+    <table class="data-table">
+      <thead><tr><th>Data Type</th><th>Examples</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Identity</strong></td><td>Name, phone number, profile photo</td><td>Account creation, identity verification</td></tr>
+        <tr><td><strong>Vehicle (Drivers)</strong></td><td>RC number, licence number, insurance</td><td>Driver verification, safety compliance</td></tr>
+        <tr><td><strong>Payment</strong></td><td>UPI ID, bank account (drivers), payment history</td><td>Fare collection, payout processing</td></tr>
+        <tr><td><strong>Communication</strong></td><td>In-app messages, support tickets</td><td>Customer support, safety monitoring</td></tr>
+        <tr><td><strong>Preferences</strong></td><td>Saved places, vehicle preferences</td><td>Personalizing your experience</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Information Collected Automatically</h3>
+    <table class="data-table">
+      <thead><tr><th>Data Type</th><th>What We Collect</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Location (GPS)</strong></td><td>Real-time location during active rides; approximate location when app is open</td><td>Matching drivers, tracking rides, navigation</td></tr>
+        <tr><td><strong>Device</strong></td><td>Device model, OS version, app version, unique device ID</td><td>App functionality, troubleshooting</td></tr>
+        <tr><td><strong>Usage</strong></td><td>Ride history, booking patterns, feature usage</td><td>Service improvement, fraud prevention</td></tr>
+        <tr><td><strong>Network</strong></td><td>IP address, connection type</td><td>Security, location approximation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+      <li><strong>Providing rides:</strong> Matching customers with nearby drivers, real-time tracking, navigation</li>
+      <li><strong>Payments:</strong> Processing fares, wallet transactions, driver payouts via Razorpay</li>
+      <li><strong>Safety:</strong> Verifying identities, monitoring for suspicious activity, investigating complaints</li>
+      <li><strong>Customer support:</strong> Resolving disputes, complaint handling, refund processing</li>
+      <li><strong>Communication:</strong> Sending booking confirmations, OTPs, promotional offers (opt-out available)</li>
+      <li><strong>Improvements:</strong> Analyzing usage patterns to improve app features and performance</li>
+      <li><strong>Legal compliance:</strong> Meeting regulatory requirements under Indian law</li>
+    </ul>
+
+    <h2>3. Location Data</h2>
+    <p>Location data is the most sensitive data we collect. Here is exactly how we use it:</p>
+    <ul>
+      <li><strong>Customers:</strong> Location is used to find your pickup point, show nearby drivers, and track the ride in progress. Location access ends when the ride is complete.</li>
+      <li><strong>Drivers:</strong> Location is used to dispatch ride requests, show customers real-time driver position, and verify ride routes. Location sharing stops when driver goes offline.</li>
+      <li><strong>We do NOT:</strong> Share your real-time location with anyone other than the matched driver/customer in an active ride. We do not sell location data to advertisers.</li>
+    </ul>
+
+    <div class="info-box">📱 You can control location permissions in your device settings. Disabling location access will prevent core features from working (ride booking, tracking). "While using app" permission is recommended.</div>
+
+    <h2>4. Sharing Your Information</h2>
+    <h3>With Drivers (Customers)</h3>
+    <p>When you book a ride, your first name, pickup location, and drop destination are shared with your matched driver. Your full phone number is masked — drivers see a masked number for in-app calls.</p>
+    <h3>With Customers (Drivers)</h3>
+    <p>When a ride is assigned, your first name, vehicle details, and rating are shared with the customer. Your real phone number is masked for privacy.</p>
+    <h3>With Service Providers</h3>
+    <ul>
+      <li><strong>Razorpay:</strong> Payment processing and driver payouts</li>
+      <li><strong>Firebase (Google):</strong> Push notifications for ride updates</li>
+      <li><strong>Google Maps:</strong> Navigation and route calculation</li>
+      <li><strong>Cloud hosting:</strong> Secure data storage (Railway.app)</li>
+    </ul>
+    <h3>Legal Requirements</h3>
+    <p>We may disclose your information if required by law, court order, or governmental authority. We will notify you where legally permitted before such disclosure.</p>
+
+    <h2>5. Data Storage & Security</h2>
+    <p>Your data is stored on secure servers located in India. We implement industry-standard security measures including:</p>
+    <ul>
+      <li>End-to-end encryption for payment transactions</li>
+      <li>SSL/TLS encryption for all data in transit</li>
+      <li>Secure password hashing (JWT + bcrypt)</li>
+      <li>Regular security audits and vulnerability assessments</li>
+      <li>Access controls limiting who can view your data internally</li>
+    </ul>
+    <p>Despite best efforts, no digital system is 100% secure. If a data breach occurs that affects your information, we will notify you within 72 hours as required under applicable law.</p>
+
+    <h2>6. Data Retention</h2>
+    <table class="data-table">
+      <thead><tr><th>Data Type</th><th>Retention Period</th></tr></thead>
+      <tbody>
+        <tr><td>Account information</td><td>Until account deletion + 90 days</td></tr>
+        <tr><td>Ride history</td><td>3 years from date of ride</td></tr>
+        <tr><td>Payment records</td><td>7 years (tax/legal requirement)</td></tr>
+        <tr><td>Location data (ride route)</td><td>1 year</td></tr>
+        <tr><td>Chat messages</td><td>90 days post-ride</td></tr>
+        <tr><td>Complaint records</td><td>2 years from resolution</td></tr>
+        <tr><td>Driver documents</td><td>Until account deletion + 1 year</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. Your Rights</h2>
+    <p>Under applicable Indian data protection laws, you have the right to:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+      <li><strong>Correction:</strong> Request correction of inaccurate personal data</li>
+      <li><strong>Deletion:</strong> Request deletion of your account and associated data (subject to legal retention requirements)</li>
+      <li><strong>Portability:</strong> Request your data in a commonly used format</li>
+      <li><strong>Opt-out:</strong> Unsubscribe from promotional communications at any time</li>
+      <li><strong>Complaint:</strong> Lodge a complaint with Sppero's grievance officer or applicable data protection authority</li>
+    </ul>
+    <p>To exercise these rights, contact us at <a href="mailto:privacy@sppero.com" style="color:var(--red)">privacy@sppero.com</a>. We respond within 30 days.</p>
+
+    <h2>8. Cookies & Tracking</h2>
+    <p>The Sppero mobile app does not use browser cookies. However, our website (sppero.com) may use cookies for analytics and performance. You can control cookies through your browser settings. Our apps use Firebase Analytics (anonymized) to understand usage patterns and improve the app experience.</p>
+
+    <h2>9. Children's Privacy</h2>
+    <p>Sppero is not intended for use by individuals under 18 years of age. We do not knowingly collect personal information from minors. If you believe a minor has created an account, please contact us immediately at <a href="mailto:support@sppero.com" style="color:var(--red)">support@sppero.com</a>.</p>
+
+    <h2>10. Third-Party Links</h2>
+    <p>The Sppero app may contain links to third-party services (e.g., Google Maps, payment pages). We are not responsible for the privacy practices of those services. We encourage you to review their respective privacy policies.</p>
+
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy periodically. We will notify you of significant changes through in-app notification or SMS. The "Last Updated" date at the top reflects the most recent revision. Continued use of Sppero after changes constitutes your acceptance.</p>
+
+    <h2>12. Grievance Officer</h2>
+    <p>In accordance with the Information Technology Act, 2000 and applicable rules, we have appointed a Grievance Officer:</p>
+    <div class="info-box">
+      <strong>Grievance Officer — Sppero</strong><br>
+      📧 Email: <a href="mailto:grievance@sppero.com" style="color:var(--red)">grievance@sppero.com</a><br>
+      ⏱️ Response time: Within 30 days of receipt of complaint<br>
+      🌐 <a href="contact.html" style="color:var(--red)">Submit via Contact Form</a>
+    </div>
+
+    <h2>13. Contact Us</h2>
+    <p>For any privacy-related questions, data requests, or concerns:</p>
+    <ul>
+      <li>📧 <a href="mailto:privacy@sppero.com" style="color:var(--red)">privacy@sppero.com</a></li>
+      <li>📧 <a href="mailto:support@sppero.com" style="color:var(--red)">support@sppero.com</a></li>
+      <li>🌐 <a href="contact.html" style="color:var(--red)">Contact Form</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width:900px;margin:0 auto;padding:0 24px">
+    <span class="fl">Sppero<span>.</span></span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cancellation.html">Cancellation</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>© 2025 Sppero · Made with ❤️ in India</p>
+  </div>
+</footer>
+</body>
+</html>
