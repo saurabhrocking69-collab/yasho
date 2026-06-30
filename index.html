@@ -1,13 +1,20 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sppero â€” India Ka Smart Ride Platform</title>
+<title>Sppero — India Ka Smart Ride Platform</title>
 <meta name="description" content="Book rides instantly with Sppero. Safe, affordable, real-time tracked rides. Download Sppero customer app or Sppero Buddy driver app today.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#e94560;--dark:#1a1a2e;--dark2:#16213e;--dark3:#0f3460;--white:#fff;--gray:#6c757d;--light:#f8f9fa;--border:#e9ecef;--green:#4CAF50;--gold:#f59e0b;--teal:#0d9488;--violet:#7c3aed}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
 /* NAV */
 nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
@@ -166,18 +173,82 @@ footer{background:#0a0a1a;padding:60px 0 32px}
 .social-row{display:flex;gap:8px}
 .soc{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:background .2s;border:1px solid rgba(255,255,255,.06)}
 .soc:hover{background:var(--red)}
-.fc-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
+.footer-col-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
 .fc-links{display:flex;flex-direction:column;gap:9px}
 .fc-links a{font-size:13px;color:rgba(255,255,255,.45);transition:color .2s}
 .fc-links a:hover{color:#fff}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(255,255,255,.3)}
 .footer-bottom a{color:rgba(255,255,255,.45)}
 .footer-bottom a:hover{color:#fff}
+/* ── CARE / CROWDFUNDING ── */
+.care-section{padding:96px 0;background:linear-gradient(180deg,#f8f9fa 0%,#fff 50%,#f0fdf4 100%);position:relative;overflow:hidden}
+.care-section::before{content:'';position:absolute;top:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(233,69,96,.07),transparent 70%);pointer-events:none}
+.care-section::after{content:'';position:absolute;bottom:-80px;right:-80px;width:350px;height:350px;background:radial-gradient(circle,rgba(13,148,136,.07),transparent 70%);pointer-events:none}
+.care-hero{text-align:center;margin-bottom:64px}
+.care-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(233,69,96,.1),rgba(245,158,11,.1));border:1px solid rgba(233,69,96,.25);color:var(--red);padding:8px 20px;border-radius:24px;font-size:13px;font-weight:700;margin-bottom:20px;letter-spacing:.3px}
+.care-badge .pulse-dot{width:9px;height:9px;border-radius:50%;background:var(--red);animation:carePulse 1.5s ease-in-out infinite}
+.care-title{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;margin-bottom:16px;color:var(--dark)}
+.care-title .hl-gold{color:var(--gold)}
+.care-title .hl-teal{color:var(--teal)}
+.care-sub{font-size:17px;color:var(--gray);line-height:1.75;max-width:580px;margin:0 auto 36px}
+.care-total-bar{display:inline-flex;align-items:center;gap:18px;background:#fff;border:2px solid var(--border);border-radius:20px;padding:14px 28px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.care-total-val{font-size:28px;font-weight:900;color:var(--dark)}
+.care-total-label{font-size:12px;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.care-total-divider{width:1px;height:32px;background:var(--border)}
+.cause-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.cause-card{border-radius:28px;overflow:hidden;position:relative;box-shadow:0 8px 40px rgba(0,0,0,.1);transition:transform .35s,box-shadow .35s}
+.cause-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.18)}
+.cause-card-top{padding:32px 28px 24px;position:relative;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:space-between}
+.cause-glow{position:absolute;width:220px;height:220px;border-radius:50%;opacity:.35;filter:blur(50px);top:-40px;right:-40px;pointer-events:none;animation:careFloat 6s ease-in-out infinite}
+.cause-icon-wrap{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px;position:relative;z-index:1;flex-shrink:0}
+.cause-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;position:relative;z-index:1}
+.cause-tagline{font-size:13px;color:rgba(255,255,255,.7);position:relative;z-index:1;line-height:1.5}
+.care-particles{position:absolute;inset:0;pointer-events:none;z-index:0}
+.care-p{position:absolute;border-radius:50%;opacity:.18;animation:careParticle linear infinite}
+.cause-card-bottom{background:#fff;padding:24px 28px}
+.cause-desc{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:18px}
+.cause-progress-wrap{margin-bottom:18px}
+.cause-progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cause-raised{font-size:16px;font-weight:800;color:var(--dark)}
+.cause-goal{font-size:12px;color:var(--gray);font-weight:600}
+.cause-bar-bg{height:8px;background:#f1f5f9;border-radius:999px;overflow:hidden}
+.cause-bar-fill{height:100%;border-radius:999px;transition:width 1.2s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.cause-bar-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:careShimmer 2.5s infinite}
+.cause-donors{font-size:11px;color:var(--gray);margin-top:6px;font-weight:600}
+.cause-amounts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.amt-btn{flex:1;min-width:54px;padding:8px 4px;border-radius:10px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;color:var(--dark);cursor:pointer;transition:all .2s;text-align:center}
+.amt-btn:hover{transform:scale(1.04)}
+.amt-btn-custom{width:100%;padding:9px;border-radius:10px;border:2px dashed var(--border);background:#fafafa;font-size:13px;font-weight:600;color:var(--dark);cursor:text;text-align:center;outline:none;transition:border-color .2s;margin-bottom:14px;display:block}
+.amt-btn-custom:focus{border-color:var(--red);background:#fff}
+.cause-donate-btn{width:100%;padding:14px;border-radius:14px;border:none;font-size:15px;font-weight:800;color:#fff;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.3px;position:relative;overflow:hidden}
+.cause-donate-btn:hover{transform:translateY(-2px)}
+.cause-donate-btn:active{transform:scale(.97)}
+.care-impact{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;background:linear-gradient(135deg,var(--dark),var(--dark3));border-radius:24px;padding:32px;margin-bottom:48px}
+.impact-item{text-align:center}
+.impact-val{font-size:26px;font-weight:900;color:#fff;margin-bottom:4px}
+.impact-label{font-size:11px;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase;letter-spacing:.7px;line-height:1.4}
+.care-trust{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;padding:24px;background:#fff;border-radius:18px;border:1px solid var(--border)}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);font-weight:600}
+.trust-icon{font-size:20px}
+.care-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
+.care-modal-bg.open{opacity:1;pointer-events:all}
+.care-modal{background:#fff;border-radius:28px;padding:48px 36px;text-align:center;max-width:420px;width:90%;transform:scale(.9);transition:transform .3s;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.care-modal-bg.open .care-modal{transform:scale(1)}
+.care-modal-icon{font-size:72px;margin-bottom:16px;display:block;animation:careBounce .6s .2s both}
+.care-modal-title{font-size:26px;font-weight:900;color:var(--dark);margin-bottom:10px}
+.care-modal-sub{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:28px}
+.care-modal-close{padding:13px 36px;background:var(--red);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;transition:transform .2s}
+.care-modal-close:hover{transform:scale(1.03)}
 /* ANIMATIONS */
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
 @keyframes carMove{0%{transform:translateX(0)}50%{transform:translateX(20px)}100%{transform:translateX(0)}}
+@keyframes carePulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.5}}
+@keyframes careFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(8deg)}}
+@keyframes careParticle{0%{transform:translateY(100%) rotate(0deg);opacity:0}10%{opacity:.18}90%{opacity:.12}100%{transform:translateY(-120%) rotate(360deg);opacity:0}}
+@keyframes careShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes careBounce{0%{transform:scale(0) rotate(-15deg)}60%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0deg)}}
 .anim{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .anim.in{opacity:1;transform:translateY(0)}
 /* MOBILE */
@@ -198,12 +269,15 @@ footer{background:#0a0a1a;padding:60px 0 32px}
   .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:rgba(26,26,46,.98);flex-direction:column;padding:20px 24px;gap:18px;border-top:1px solid rgba(255,255,255,.08)}
   .nav-links.open{display:flex}
   .nav-toggle{display:block}
+  .cause-grid{grid-template-columns:1fr}
+  .care-impact{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:580px){
   .vehicles{grid-template-columns:1fr 1fr}
   .features-grid{grid-template-columns:1fr}
   .bonus-grid{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr}
+  .care-trust{flex-direction:column;gap:16px}
 }
 </style>
 </head>
@@ -213,32 +287,440 @@ footer{background:#0a0a1a;padding:60px 0 32px}
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="logo">Sppero<span>.</span></a>
-    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">â˜°</button>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#vehicles" onclick="closeNav()">Vehicles</a></li>
       <li><a href="#how-it-works" onclick="closeNav()">How It Works</a></li>
       <li><a href="#features" onclick="closeNav()">Features</a></li>
       <li><a href="#rewards" onclick="closeNav()">Rewards</a></li>
-      <li><a href="#care" onclick="closeNav()">â¤ï¸ Donate</a></li>
+      <li><a href="#care" onclick="closeNav()">&#10084;&#65039; Donate</a></li>
+      <li><a href="contact.html" onclick="closeNav()">Contact</a></li>
+      <li><a href="#download" class="nav-cta" onclick="closeNav()">Download App</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="dot"></span> Now available across India</div>
+      <h1>India Ka<br><span class="accent">Smart Ride</span><br>Platform</h1>
+      <p class="hero-sub">Book rides in seconds. Track your driver live. Pay your way — cash, UPI, or wallet. Sppero hai toh tension nahi.</p>
+      <div class="hero-btns">
+        <a href="#download" class="btn-store light">
+          <span class="store-icon">&#9654;</span>
+          <span class="store-text"><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+        <a href="#download" class="btn-store dark">
+          <span class="store-icon">&#127822;</span>
+          <span class="store-text"><small>Download on</small><strong>App Store</strong></span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-val">50K+</div><div class="stat-label">Happy Riders</div></div>
+        <div><div class="stat-val">5K+</div><div class="stat-label">Sppero Buddies</div></div>
+        <div><div class="stat-val">4.8&#9733;</div><div class="stat-label">Avg Rating</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="fbadge fbadge-1">
+        <span class="fb-icon">&#128205;</span>
+        Driver 2 min away
+        <div class="fb-sub">Live tracking on</div>
+      </div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-map">
+            <div class="ps-map-grid"></div>
+            <div class="ps-route"></div>
+            <div class="ps-pin-a">&#128205;</div>
+            <div class="ps-pin-b">&#127937;</div>
+            <div class="ps-car">&#128650;</div>
+          </div>
+          <div class="ps-card">
+            <div class="ps-card-icon">&#128650;</div>
+            <div>
+              <div class="ps-card-t1">Ramesh — Auto</div>
+              <div class="ps-card-t2">&#11088; 4.9 · 2 min away</div>
+            </div>
+            <div class="ps-card-val">&#8377;87</div>
+          </div>
+          <div class="ps-card">
+            <div class="ps-card-icon" style="background:#4CAF50">&#128179;</div>
+            <div>
+              <div class="ps-card-t1">Wallet Balance</div>
+              <div class="ps-card-t2">Cashback eligible</div>
+            </div>
+            <div class="ps-card-val">&#8377;340</div>
+          </div>
+        </div>
+      </div>
+      <div class="fbadge fbadge-2">
+        <span class="fb-icon">&#127873;</span>
+        Scratch card unlocked!
+        <div class="fb-sub">&#8377;3 added to wallet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLES -->
+<section class="section" id="vehicles">
+  <div class="container">
+    <div class="anim">
+      <div class="tag">Our Fleet</div>
+      <h2 class="section-title">Choose Your Ride</h2>
+      <p class="section-sub">From budget bikes to spacious SUVs — every journey has the perfect option on Sppero.</p>
+    </div>
+    <div class="vehicles anim">
+      <div class="vc"><span class="vc-emoji">&#128693;</span><div class="vc-name">Bike</div><div class="vc-desc">Fastest way through traffic. Solo rides, quick delivery, everyday commute.</div><div class="vc-price">Starting &#8377;15 &middot; Per km &#8377;6</div></div>
+      <div class="vc"><span class="vc-emoji">&#128650;</span><div class="vc-name">Auto</div><div class="vc-desc">Classic 3-wheeler comfort. Up to 3 passengers. Best for city hops.</div><div class="vc-price">Starting &#8377;25 &middot; Per km &#8377;9</div></div>
+      <div class="vc"><span class="vc-emoji">&#128663;</span><div class="vc-name">Sppero AC</div><div class="vc-desc">Air-conditioned sedans for comfort rides. Professional, clean, reliable.</div><div class="vc-price">Starting &#8377;50 &middot; Per km &#8377;13</div></div>
+      <div class="vc"><span class="vc-emoji">&#128665;</span><div class="vc-name">SUV</div><div class="vc-desc">Premium space for families &amp; groups. Up to 6 passengers in style.</div><div class="vc-price">Starting &#8377;80 &middot; Per km &#8377;18</div></div>
+    </div>
+    <div class="anim" style="margin-top:28px;padding:20px 24px;background:linear-gradient(135deg,rgba(233,69,96,.06),rgba(15,52,96,.06));border-radius:16px;border:1px solid var(--border);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="font-size:24px">&#128336;</span>
+      <div>
+        <strong style="font-size:15px;color:var(--dark)">Hourly Booking Also Available!</strong>
+        <div style="font-size:13px;color:var(--gray);margin-top:3px">Need a ride for the whole day? Book any vehicle by the hour — driver stays with you. Perfect for errands, meetings, and outings.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-dark" id="how-it-works">
+  <div class="container">
+    <div class="anim tc">
+      <div class="tag">Simple Steps</div>
+      <h2 class="section-title" style="color:#fff">How It Works</h2>
+      <p class="section-sub tc">Getting a ride or earning with Sppero is dead simple. Pick your role below.</p>
+    </div>
+    <div class="how-tabs anim" id="howTabs">
+      <button class="htab active" onclick="switchTab('customer')">&#128100; I'm a Rider</button>
+      <button class="htab" onclick="switchTab('driver')">&#128663; I'm a Driver</button>
+    </div>
+    <div class="steps anim" id="stepsCustomer">
+      <div class="step"><div class="step-num">1</div><span class="step-icon">&#128241;</span><div class="step-title">Download &amp; Register</div><div class="step-desc">Download Sppero app, enter your phone number, and verify with OTP. Quick 1-minute setup.</div></div>
+      <div class="step"><div class="step-num">2</div><span class="step-icon">&#128205;</span><div class="step-title">Set Your Location</div><div class="step-desc">Enter your pickup point, choose destination, select vehicle type, and see the fare before booking.</div></div>
+      <div class="step"><div class="step-num">3</div><span class="step-icon">&#128247;</span><div class="step-title">Track in Real-Time</div><div class="step-desc">Watch your driver approach on live map. Get notified when they arrive. Share OTP to start the ride.</div></div>
+      <div class="step"><div class="step-num">4</div><span class="step-icon">&#128179;</span><div class="step-title">Pay Your Way</div><div class="step-desc">Pay with cash, UPI, or Sppero Wallet. Rate your driver and earn scratch card rewards!</div></div>
+      <div class="step"><div class="step-num">5</div><span class="step-icon">&#127873;</span><div class="step-title">Earn Rewards</div><div class="step-desc">Every ride earns scratch cards, cashback, and loyalty points. Invite friends to earn referral bonuses.</div></div>
+      <div class="step"><div class="step-num">6</div><span class="step-icon">&#11088;</span><div class="step-title">Rate &amp; Repeat</div><div class="step-desc">Rate your experience. Your feedback helps keep Sppero safe and excellent for everyone.</div></div>
+    </div>
+    <div class="steps anim" id="stepsDriver" style="display:none">
+      <div class="step"><div class="step-num">1</div><span class="step-icon">&#128242;</span><div class="step-title">Download Sppero Buddy</div><div class="step-desc">Install the Sppero Buddy driver app, register with your phone and basic details. Free to join.</div></div>
+      <div class="step"><div class="step-num">2</div><span class="step-icon">&#128196;</span><div class="step-title">Upload Documents</div><div class="step-desc">Submit driving licence, vehicle RC, insurance, and photo. Our team verifies within 24 hours.</div></div>
+      <div class="step"><div class="step-num">3</div><span class="step-icon">&#128994;</span><div class="step-title">Go Online &amp; Earn</div><div class="step-desc">Tap "Go Online" when ready. Ride requests appear instantly. Accept and navigate to the customer.</div></div>
+      <div class="step"><div class="step-num">4</div><span class="step-icon">&#128272;</span><div class="step-title">Verify OTP &amp; Ride</div><div class="step-desc">Ask customer for 4-digit OTP to start the trip. Chat inside the app. Drop safely to destination.</div></div>
+      <div class="step"><div class="step-num">5</div><span class="step-icon">&#128176;</span><div class="step-title">Get Paid Instantly</div><div class="step-desc">Earnings credited to Sppero Wallet after every ride. Withdraw to bank or UPI anytime.</div></div>
+      <div class="step"><div class="step-num">6</div><span class="step-icon">&#128640;</span><div class="step-title">Earn Bonus</div><div class="step-desc">Complete peak-hour rides, hit daily targets, and earn bonus tokens on top of your base fare.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-light" id="features">
+  <div class="container">
+    <div class="anim tc">
+      <div class="tag">Why Sppero</div>
+      <h2 class="section-title">Everything You Need in One App</h2>
+      <p class="section-sub tc">Built for India's roads and India's riders. Every feature designed with you in mind.</p>
+    </div>
+    <div class="features-grid anim">
+      <div class="fc"><span class="fc-icon">&#128205;</span><div class="fc-title">Live GPS Tracking</div><div class="fc-desc">Watch your driver's exact position update in real-time on the map. No more "where is my driver?" calls.</div></div>
+      <div class="fc"><span class="fc-icon">&#128272;</span><div class="fc-title">OTP Verification</div><div class="fc-desc">Every ride starts with a 4-digit OTP shared by you. Ensures only the right driver starts your trip.</div></div>
+      <div class="fc"><span class="fc-icon">&#128172;</span><div class="fc-title">In-App Chat</div><div class="fc-desc">Message your driver directly inside the app without sharing personal numbers. Quick, safe, convenient.</div></div>
+      <div class="fc"><span class="fc-icon">&#128222;</span><div class="fc-title">Masked Calling</div><div class="fc-desc">Call your driver through masked numbers. Your real phone number is never shared — privacy first.</div></div>
+      <div class="fc"><span class="fc-icon">&#128179;</span><div class="fc-title">Sppero Wallet</div><div class="fc-desc">Top up via Razorpay and pay seamlessly. Earn cashback on wallet payments. Rewards auto-added.</div></div>
+      <div class="fc"><span class="fc-icon">&#11088;</span><div class="fc-title">Rating System</div><div class="fc-desc">Rate every trip. Consistent low-rated drivers are removed to keep every ride safe and pleasant.</div></div>
+      <div class="fc"><span class="fc-icon">&#128336;</span><div class="fc-title">Hourly Booking</div><div class="fc-desc">Book a vehicle for 1–8 hours. Driver stays with you for errands, tours, or back-to-back meetings.</div></div>
+      <div class="fc"><span class="fc-icon">&#9888;&#65039;</span><div class="fc-title">Complaint System</div><div class="fc-desc">Report any issue through the app. Our support team reviews and resolves within 48 hours.</div></div>
+      <div class="fc"><span class="fc-icon">&#128220;</span><div class="fc-title">Ride History</div><div class="fc-desc">Full history of every ride — fare, route, driver details, and receipts. Always at your fingertips.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER APP -->
+<section class="section" id="customer-app">
+  <div class="container">
+    <div class="app-split anim">
+      <div>
+        <span class="app-tag">For Riders</span>
+        <h2 class="app-title">Sppero<br>Customer App</h2>
+        <p class="app-desc">Your complete mobility companion. Book standard or hourly rides, track your driver live, manage your wallet, and earn rewards — all in one beautifully simple app.</p>
+        <div class="app-features">
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Instant Booking in &lt;30 sec</strong><span>Choose vehicle, see fare, confirm — done.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Live Driver Tracking</strong><span>Real-time GPS map so you always know ETA.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Multiple Payment Methods</strong><span>Cash, UPI, Razorpay, or Sppero Wallet.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Saved Places</strong><span>Save home, office, and frequent destinations.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Rewards &amp; Scratch Cards</strong><span>Win rewards after every ride automatically.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Hourly Ride Booking</strong><span>Book for hours with live chat with driver.</span></div></div>
+        </div>
+      </div>
+      <div class="app-visual">
+        <div class="av-card"><span class="av-icon">&#128650;</span><div><div class="av-title">Auto — Ramesh Kumar</div><div class="av-sub">&#11088; 4.9 &middot; MH-12-AB-3456 &middot; 2 min away</div></div><div class="av-val">&#8377;87</div></div>
+        <div class="av-card"><span class="av-icon">&#128179;</span><div><div class="av-title">Sppero Wallet</div><div class="av-sub">5% cashback on wallet payments</div></div><div class="av-val">&#8377;340</div></div>
+        <div class="av-card"><span class="av-icon">&#127873;</span><div><div class="av-title">Scratch Card Ready!</div><div class="av-sub">Tap to reveal your reward</div></div><div class="av-val" style="color:#FFC107">&#127920;</div></div>
+        <div class="av-card"><span class="av-icon">&#128101;</span><div><div class="av-title">Referral Bonus</div><div class="av-sub">Friend completes 1st ride &rarr; &#8377;50 each</div></div><div class="av-val">&#8377;50</div></div>
+        <div class="av-card"><span class="av-icon">&#128220;</span><div><div class="av-title">Today's Trips</div><div class="av-sub">3 rides &middot; &#8377;247 total spent</div></div><div class="av-val" style="color:#4CAF50">&#10003;</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIVER APP -->
+<section class="section section-light" id="driver-app">
+  <div class="container">
+    <div class="app-split flip anim">
+      <div>
+        <span class="app-tag">For Drivers</span>
+        <h2 class="app-title">Sppero Buddy<br>Driver App</h2>
+        <p class="app-desc">Drive on your terms. Set your own hours, track your earnings live, and get paid fast via bank or UPI. Sppero Buddy is your business partner on wheels.</p>
+        <div class="app-features">
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Instant Ride Requests</strong><span>Accept or reject — always your choice.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Earnings Dashboard</strong><span>Live wallet balance, daily/weekly stats.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Fast Payouts</strong><span>Withdraw to bank/UPI in 24 hrs via Razorpay.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Peak Hour Bonuses</strong><span>Earn extra during high-demand periods.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>In-App Navigation</strong><span>Turn-by-turn guidance to pickup &amp; drop.</span></div></div>
+          <div class="af"><div class="af-check">&#9989;</div><div><strong>Hourly Booking System</strong><span>Accept full-day bookings for higher income.</span></div></div>
+        </div>
+      </div>
+      <div class="app-visual" style="background:linear-gradient(145deg,#1a2e1a,#1a2e2e)">
+        <div class="av-card"><span class="av-icon">&#128994;</span><div><div class="av-title">You're Online</div><div class="av-sub">Waiting for ride requests nearby</div></div><div class="av-val" style="color:#4CAF50">LIVE</div></div>
+        <div class="av-card"><span class="av-icon">&#128176;</span><div><div class="av-title">Today's Earnings</div><div class="av-sub">8 rides completed &middot; 4 hrs online</div></div><div class="av-val">&#8377;1,240</div></div>
+        <div class="av-card"><span class="av-icon">&#127942;</span><div><div class="av-title">Bonus Tokens</div><div class="av-sub">6 tokens earned today</div></div><div class="av-val" style="color:#FFC107">&times;6</div></div>
+        <div class="av-card"><span class="av-icon">&#127974;</span><div><div class="av-title">Wallet Balance</div><div class="av-sub">Withdraw to bank or UPI</div></div><div class="av-val">&#8377;4,380</div></div>
+        <div class="av-card"><span class="av-icon">&#11088;</span><div><div class="av-title">Your Rating</div><div class="av-sub">Based on last 50 rides</div></div><div class="av-val" style="color:#FFC107">4.8</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REWARDS -->
+<section class="section" id="rewards">
+  <div class="container">
+    <div class="anim tc">
+      <div class="tag">Rewards Program</div>
+      <h2 class="section-title">Ride More, Earn More</h2>
+      <p class="section-sub tc">Sppero rewards every ride. From scratch cards to referral bonuses — there's always something waiting for you.</p>
+    </div>
+    <div class="rewards-grid anim">
+      <div class="rw"><div class="rw-bg">&#127920;</div><span class="rw-icon">&#127873;</span><div class="rw-title">Scratch Card Rewards</div><div class="rw-desc">Every completed ride unlocks a scratch card in the Sppero app. Scratch to reveal instant cash — credited directly to your wallet.</div><span class="rw-tag">After every ride</span></div>
+      <div class="rw"><div class="rw-bg">&#128101;</div><span class="rw-icon">&#128107;</span><div class="rw-title">Refer &amp; Earn</div><div class="rw-desc">Share your unique referral code with friends. When your friend signs up and completes their very first ride — both of you earn &#8377;50 in your Sppero Wallet instantly.</div><span class="rw-tag">&#8377;50 for you + &#8377;50 for friend</span></div>
+      <div class="rw"><div class="rw-bg">&#128179;</div><span class="rw-icon">&#128179;</span><div class="rw-title">Wallet Cashback</div><div class="rw-desc">Pay for rides using your Sppero Wallet and earn automatic cashback on every payment. The more you ride with wallet payments, the more you save.</div><span class="rw-tag">On every wallet payment</span></div>
+      <div class="rw"><div class="rw-bg">&#11088;</div><span class="rw-icon">&#11088;</span><div class="rw-title">Loyalty Points</div><div class="rw-desc">Earn loyalty points on every ride, regardless of payment method. Accumulate points and redeem them for wallet balance, fare discounts, or exclusive Sppero benefits.</div><span class="rw-tag">Every ride counts</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIVER BONUS -->
+<section class="section section-gradient" id="driver-bonus">
+  <div class="container">
+    <div class="anim tc">
+      <div class="tag">For Sppero Buddies</div>
+      <h2 class="section-title" style="color:#fff">Driver Bonus System</h2>
+      <p class="section-sub tc">Driving with Sppero Buddy isn't just earning per ride — it's a full bonus ecosystem built to reward your dedication.</p>
+    </div>
+    <div class="bonus-grid anim">
+      <div class="bc"><span class="bc-icon">&#9889;</span><div class="bc-title">Peak Hour Bonus</div><div class="bc-desc">Earn extra tokens during morning rush (7–10 AM), evening peak (5–9 PM), and rainy days when demand surges.</div></div>
+      <div class="bc"><span class="bc-icon">&#127919;</span><div class="bc-title">Ride Target Bonus</div><div class="bc-desc">Hit daily or weekly ride targets to unlock bonus token credits. More rides = bigger multiplier rewards.</div></div>
+      <div class="bc"><span class="bc-icon">&#127942;</span><div class="bc-title">Token Rewards</div><div class="bc-desc">Bonus tokens convert to real wallet balance. Redeem anytime — no expiry on earned tokens.</div></div>
+      <div class="bc"><span class="bc-icon">&#128200;</span><div class="bc-title">Surge Pricing</div><div class="bc-desc">During high demand, fares automatically surge. You earn more per km without doing anything different.</div></div>
+      <div class="bc"><span class="bc-icon">&#128175;</span><div class="bc-title">Rating Bonus</div><div class="bc-desc">Maintain a high star rating consistently and unlock exclusive high-rating driver perks and priority matching.</div></div>
+      <div class="bc"><span class="bc-icon">&#127974;</span><div class="bc-title">Fast Payouts</div><div class="bc-desc">Request payout anytime. Sppero auto-transfers via RazorpayX directly to your bank or UPI in hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-light">
+  <div class="container">
+    <div class="anim tc">
+      <div class="tag">Real Reviews</div>
+      <h2 class="section-title">What People Are Saying</h2>
+      <p class="section-sub tc">Thousands of riders and drivers trust Sppero every day. Here's what they have to say.</p>
+    </div>
+    <div class="tg anim">
+      <div class="tc-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tc-text">"Sppero ne meri daily commute ekdum easy kar di. Driver always on time, real-time tracking gives me complete peace of mind. Scratch card rewards are a bonus!"</p><div class="tc-author"><div class="tc-avatar">P</div><div><div class="tc-name">Priya Sharma</div><div class="tc-city">Mumbai, Customer</div></div></div></div>
+      <div class="tc-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tc-text">"Sppero Buddy se meri income 40% badh gayi. Peak bonus system is amazing — I earn &#8377;1,500+ daily. Payout within hours directly to my bank account. Bahut acha hai!"</p><div class="tc-author"><div class="tc-avatar">R</div><div><div class="tc-name">Raju Verma</div><div class="tc-city">Pune, Sppero Buddy</div></div></div></div>
+      <div class="tc-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tc-text">"Refer code use kiya aur dono ko &#8377;50 mila friend ki pehli ride pe. Wallet cashback bhi milta hai. App is super smooth and booking takes less than 1 minute!"</p><div class="tc-author"><div class="tc-avatar">A</div><div><div class="tc-name">Arjun Mehta</div><div class="tc-city">Bangalore, Customer</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPPERO CARE — CROWDFUNDING -->
+<section class="care-section" id="care">
+  <div class="container">
+
+    <div class="care-hero anim">
+      <div class="care-badge"><span class="pulse-dot"></span> Sppero Care Initiative — Real Impact</div>
+      <h2 class="care-title">Ride Together.<br><span class="hl-gold">Give Together.</span> <span class="hl-teal">Heal Together.</span></h2>
+      <p class="care-sub">Every rupee you donate directly supports Sppero Buddy drivers, helps accident-injured customers recover, and powers community welfare. No middlemen. 100% goes to the cause.</p>
+      <div class="care-total-bar">
+        <div><div class="care-total-val" id="totalRaised">&#8377;0</div><div class="care-total-label">Total Raised</div></div>
+        <div class="care-total-divider"></div>
+        <div><div class="care-total-val" id="totalDonors">0</div><div class="care-total-label">Kind Donors</div></div>
+        <div class="care-total-divider"></div>
+        <div><div class="care-total-val">3</div><div class="care-total-label">Active Causes</div></div>
+      </div>
+    </div>
+
+    <div class="care-impact anim">
+      <div class="impact-item"><div class="impact-val" data-target="247" data-type="num">0</div><div class="impact-label">Drivers Supported with Extra Income</div></div>
+      <div class="impact-item"><div class="impact-val" data-target="38" data-type="num">0</div><div class="impact-label">Accident Victims Given Emergency Care</div></div>
+      <div class="impact-item"><div class="impact-val" data-target="1200" data-type="num">0</div><div class="impact-label">Meals Donated to Families</div></div>
+      <div class="impact-item"><div class="impact-val" data-target="94" data-type="pct">0</div><div class="impact-label">% Donor Satisfaction Score</div></div>
+    </div>
+
+    <div class="cause-grid anim">
+
+      <!-- Driver Welfare -->
+      <div class="cause-card">
+        <div class="cause-card-top" style="background:linear-gradient(145deg,#1a1a2e,#e94560)">
+          <div class="cause-glow" style="background:#e94560"></div>
+          <div class="care-particles" id="p-driver"></div>
+          <div>
+            <div class="cause-icon-wrap" style="background:rgba(255,255,255,.15)">&#128650;</div>
+            <div class="cause-name">Driver Welfare Fund</div>
+            <div class="cause-tagline">Income protection, medical help &amp; breakdown support for Sppero Buddies who keep India moving.</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;position:relative;z-index:1;margin-top:12px;flex-wrap:wrap">
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#127973; Medical</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#128295; Breakdown</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#128176; Income</div>
+          </div>
+        </div>
+        <div class="cause-card-bottom">
+          <p class="cause-desc">Our drivers brave extreme heat, rains, and long hours to reach you on time. When they fall sick or their vehicle breaks down, they lose income instantly. Your donation creates a safety net — medical support, vehicle repair fund, and emergency cash for genuine cases.</p>
+          <div class="cause-progress-wrap">
+            <div class="cause-progress-label"><span class="cause-raised" id="dr-raised">&#8377;1,24,500</span><span class="cause-goal">Goal: &#8377;5,00,000</span></div>
+            <div class="cause-bar-bg"><div class="cause-bar-fill" id="dr-bar" style="width:0%;background:linear-gradient(90deg,#e94560,#f59e0b)"></div></div>
+            <div class="cause-donors" id="dr-donors">&#129309; 312 donors &middot; 24.9% funded</div>
+          </div>
+          <div class="cause-amounts" data-cause="driver">
+            <button class="amt-btn" onclick="selectAmt(this,'driver',50)">&#8377;50</button>
+            <button class="amt-btn" onclick="selectAmt(this,'driver',100)">&#8377;100</button>
+            <button class="amt-btn amt-sel-driver" onclick="selectAmt(this,'driver',200)" style="background:#e94560;border-color:#e94560;color:#fff">&#8377;200</button>
+            <button class="amt-btn" onclick="selectAmt(this,'driver',500)">&#8377;500</button>
+          </div>
+          <input class="amt-btn-custom" id="custom-driver" type="number" placeholder="Enter custom amount (&#8377;)" min="10" oninput="customAmt('driver',this.value)">
+          <button class="cause-donate-btn" onclick="donateTo('driver')" style="background:linear-gradient(135deg,#e94560,#c0392b);box-shadow:0 8px 24px rgba(233,69,96,.35)">&#10084;&#65039; Donate to Driver Fund</button>
+        </div>
+      </div>
+
+      <!-- Health Fund -->
+      <div class="cause-card">
+        <div class="cause-card-top" style="background:linear-gradient(145deg,#0d4a3a,#0d9488)">
+          <div class="cause-glow" style="background:#0d9488"></div>
+          <div class="care-particles" id="p-health"></div>
+          <div>
+            <div class="cause-icon-wrap" style="background:rgba(255,255,255,.15)">&#127973;</div>
+            <div class="cause-name">Ride Safe Health Fund</div>
+            <div class="cause-tagline">Emergency care &amp; recovery support for customers injured in road accidents during Sppero rides.</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;position:relative;z-index:1;margin-top:12px;flex-wrap:wrap">
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#128657; Emergency</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#128138; Recovery</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#129338; Rehab</div>
+          </div>
+        </div>
+        <div class="cause-card-bottom">
+          <p class="cause-desc">India's roads are unpredictable. When an accident happens during a ride, medical bills can destroy families financially. This fund covers emergency hospitalisation, medicines, physiotherapy, and post-recovery support for verified accident victims — no questions, no delays.</p>
+          <div class="cause-progress-wrap">
+            <div class="cause-progress-label"><span class="cause-raised" id="hl-raised">&#8377;87,200</span><span class="cause-goal">Goal: &#8377;3,00,000</span></div>
+            <div class="cause-bar-bg"><div class="cause-bar-fill" id="hl-bar" style="width:0%;background:linear-gradient(90deg,#0d9488,#10b981)"></div></div>
+            <div class="cause-donors" id="hl-donors">&#129309; 218 donors &middot; 29.1% funded</div>
+          </div>
+          <div class="cause-amounts" data-cause="health">
+            <button class="amt-btn" onclick="selectAmt(this,'health',50)">&#8377;50</button>
+            <button class="amt-btn" onclick="selectAmt(this,'health',100)">&#8377;100</button>
+            <button class="amt-btn" onclick="selectAmt(this,'health',200)" style="background:#0d9488;border-color:#0d9488;color:#fff">&#8377;200</button>
+            <button class="amt-btn" onclick="selectAmt(this,'health',500)">&#8377;500</button>
+          </div>
+          <input class="amt-btn-custom" id="custom-health" type="number" placeholder="Enter custom amount (&#8377;)" min="10" oninput="customAmt('health',this.value)">
+          <button class="cause-donate-btn" onclick="donateTo('health')" style="background:linear-gradient(135deg,#0d9488,#0f766e);box-shadow:0 8px 24px rgba(13,148,136,.35)">&#127973; Donate to Health Fund</button>
+        </div>
+      </div>
+
+      <!-- Social Fund -->
+      <div class="cause-card">
+        <div class="cause-card-top" style="background:linear-gradient(145deg,#1e1b4b,#7c3aed)">
+          <div class="cause-glow" style="background:#7c3aed"></div>
+          <div class="care-particles" id="p-social"></div>
+          <div>
+            <div class="cause-icon-wrap" style="background:rgba(255,255,255,.15)">&#127807;</div>
+            <div class="cause-name">Sppero Social Fund</div>
+            <div class="cause-tagline">Education, community welfare &amp; empowering underprivileged families in cities where Sppero operates.</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;position:relative;z-index:1;margin-top:12px;flex-wrap:wrap">
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#128218; Education</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#127857; Meals</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:6px 14px;font-size:12px;color:#fff;font-weight:700">&#127968; Shelter</div>
+          </div>
+        </div>
+        <div class="cause-card-bottom">
+          <p class="cause-desc">Sppero's mission goes beyond rides. We believe in giving back to the communities we serve. This fund sponsors school fees for drivers' children, provides meals to homeless families near ride hotspots, and supports skill-development programs — turning every ride into a ripple of change.</p>
+          <div class="cause-progress-wrap">
+            <div class="cause-progress-label"><span class="cause-raised" id="sw-raised">&#8377;56,800</span><span class="cause-goal">Goal: &#8377;2,00,000</span></div>
+            <div class="cause-bar-bg"><div class="cause-bar-fill" id="sw-bar" style="width:0%;background:linear-gradient(90deg,#7c3aed,#a855f7)"></div></div>
+            <div class="cause-donors" id="sw-donors">&#129309; 142 donors &middot; 28.4% funded</div>
+          </div>
+          <div class="cause-amounts" data-cause="social">
+            <button class="amt-btn" onclick="selectAmt(this,'social',50)">&#8377;50</button>
+            <button class="amt-btn" onclick="selectAmt(this,'social',100)">&#8377;100</button>
+            <button class="amt-btn" onclick="selectAmt(this,'social',200)" style="background:#7c3aed;border-color:#7c3aed;color:#fff">&#8377;200</button>
+            <button class="amt-btn" onclick="selectAmt(this,'social',500)">&#8377;500</button>
+          </div>
+          <input class="amt-btn-custom" id="custom-social" type="number" placeholder="Enter custom amount (&#8377;)" min="10" oninput="customAmt('social',this.value)">
+          <button class="cause-donate-btn" onclick="donateTo('social')" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);box-shadow:0 8px 24px rgba(124,58,237,.35)">&#127807; Donate to Social Fund</button>
+        </div>
+      </div>
+
+    </div><!-- /cause-grid -->
+
+    <div class="care-trust anim">
+      <div class="trust-item"><span class="trust-icon">&#128274;</span> 100% Secure via Razorpay</div>
+      <div class="trust-item"><span class="trust-icon">&#129534;</span> Tax Receipt Provided</div>
+      <div class="trust-item"><span class="trust-icon">&#128202;</span> Monthly Impact Reports</div>
+      <div class="trust-item"><span class="trust-icon">&#129309;</span> No Commission Deducted</div>
+      <div class="trust-item"><span class="trust-icon">&#9989;</span> Verified by Sppero Team</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Thank You Modal -->
+<div class="care-modal-bg" id="careModal">
+  <div class="care-modal">
+    <span class="care-modal-icon">&#127881;</span>
+    <div class="care-modal-title">Bahut Shukriya!</div>
+    <p class="care-modal-sub" id="modalMsg">Aapka donation milaa. Aap is change ka hissa bane — yeh ek real difference banayega kisi ki zindagi mein.</p>
+    <button class="care-modal-close" onclick="closeCareModal()">Wapas Jao</button>
+  </div>
+</div>
+
 <!-- DOWNLOAD CTA -->
 <section class="dl-section" id="download">
   <div class="container">
     <h2 class="dl-title">Ready to Ride Smarter?</h2>
-    <p class="dl-sub">Download Sppero now and get your first ride experience. Drivers â€” join as Sppero Buddy and start earning today.</p>
+    <p class="dl-sub">Download Sppero now and get your first ride experience. Drivers — join as Sppero Buddy and start earning today.</p>
     <div class="dl-btns">
       <a href="#" class="btn-store light" style="justify-content:center;min-width:200px">
-        <span class="store-icon">â–¶</span>
+        <span class="store-icon">&#9654;</span>
         <span class="store-text"><small>Get it on</small><strong>Google Play</strong></span>
       </a>
       <a href="#" class="btn-store dark" style="justify-content:center;min-width:200px">
-        <span class="store-icon">ðŸŽ</span>
+        <span class="store-icon">&#127822;</span>
         <span class="store-text"><small>Download on</small><strong>App Store</strong></span>
       </a>
     </div>
-    <p style="color:rgba(255,255,255,.3);font-size:12px;margin-top:24px;position:relative;z-index:1">Available for Android & iOS Â· Free to download Â· No hidden charges</p>
+    <p style="color:rgba(255,255,255,.3);font-size:12px;margin-top:24px;position:relative;z-index:1">Available for Android &amp; iOS &middot; Free to download &middot; No hidden charges</p>
     <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1">
       <a href="#" class="btn-store dark" style="background:rgba(255,255,255,.06);justify-content:center;min-width:220px">
-        <span class="store-icon">ðŸš—</span>
+        <span class="store-icon">&#128663;</span>
         <span class="store-text"><small>Drive with us</small><strong>Sppero Buddy App</strong></span>
       </a>
     </div>
@@ -253,14 +735,14 @@ footer{background:#0a0a1a;padding:60px 0 32px}
         <span class="fl">Sppero<span>.</span></span>
         <p class="fd">India's smart ride-hailing platform connecting riders and drivers for safe, affordable, real-time tracked journeys.</p>
         <div class="social-row">
-          <div class="soc">ðŸ“˜</div>
-          <div class="soc">ðŸ“¸</div>
-          <div class="soc">ðŸ¦</div>
-          <div class="soc">â–¶</div>
+          <div class="soc">&#128216;</div>
+          <div class="soc">&#128248;</div>
+          <div class="soc">&#128038;</div>
+          <div class="soc">&#9654;</div>
         </div>
       </div>
       <div>
-        <div class="fc-title">Riders</div>
+        <div class="footer-col-title">Riders</div>
         <div class="fc-links">
           <a href="#vehicles">Vehicle Types</a>
           <a href="#how-it-works">How to Book</a>
@@ -270,7 +752,7 @@ footer{background:#0a0a1a;padding:60px 0 32px}
         </div>
       </div>
       <div>
-        <div class="fc-title">Drivers</div>
+        <div class="footer-col-title">Drivers</div>
         <div class="fc-links">
           <a href="#driver-app">Sppero Buddy</a>
           <a href="#how-it-works">How to Join</a>
@@ -280,12 +762,148 @@ footer{background:#0a0a1a;padding:60px 0 32px}
         </div>
       </div>
       <div>
-        <div class="fc-title">Company</div>
+        <div class="footer-col-title">Company</div>
         <div class="fc-links">
           <a href="terms.html">Terms of Use</a>
           <a href="privacy.html">Privacy Policy</a>
           <a href="cancellation.html">Cancellation</a>
-          <a href="#care">â¤ï¸ Donate / Care</a>
+          <a href="#care">&#10084;&#65039; Donate / Care</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="contact.html">Support</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Sppero. All rights reserved.</span>
+      <span>Made with &#10084;&#65039; in India</span>
+      <span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="cancellation.html">Cancellation</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+function closeNav(){document.getElementById('navLinks').classList.remove('open')}
+
+function switchTab(role){
+  const tabs=document.querySelectorAll('.htab');
+  tabs.forEach((t,i)=>t.classList.toggle('active',i===(role==='customer'?0:1)));
+  document.getElementById('stepsCustomer').style.display=role==='customer'?'grid':'none';
+  document.getElementById('stepsDriver').style.display=role==='driver'?'grid':'none';
+}
+
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in')}});
+},{threshold:0.1});
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').style.background=
+    window.scrollY>50?'rgba(26,26,46,.98)':'rgba(26,26,46,.96)';
+});
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('nav'))closeNav();
+});
+
+// ── SPPERO CARE ────────────────────────────────────────────────────
+const RZP_KEY = 'rzp_live_T78qa8Ow78X7LI';
+
+const causeConfig = {
+  driver: { name:'Driver Welfare Fund', color:'#e94560', raised:124500, goal:500000, donors:312 },
+  health: { name:'Ride Safe Health Fund', color:'#0d9488', raised:87200, goal:300000, donors:218 },
+  social: { name:'Sppero Social Fund', color:'#7c3aed', raised:56800, goal:200000, donors:142 },
+};
+const selectedAmt = { driver:200, health:200, social:200 };
+
+const careObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    setTimeout(()=>{ document.getElementById('dr-bar').style.width=(causeConfig.driver.raised/causeConfig.driver.goal*100).toFixed(1)+'%'; },200);
+    setTimeout(()=>{ document.getElementById('hl-bar').style.width=(causeConfig.health.raised/causeConfig.health.goal*100).toFixed(1)+'%'; },400);
+    setTimeout(()=>{ document.getElementById('sw-bar').style.width=(causeConfig.social.raised/causeConfig.social.goal*100).toFixed(1)+'%'; },600);
+    document.querySelectorAll('[data-target]').forEach(el=>{
+      const target=parseInt(el.dataset.target), isPct=el.dataset.type==='pct';
+      let cur=0; const step=Math.max(1,Math.floor(target/60));
+      const t=setInterval(()=>{
+        cur=Math.min(cur+step,target);
+        el.textContent=isPct?cur+'%':cur.toLocaleString('en-IN');
+        if(cur>=target){el.textContent=isPct?target+'%':target.toLocaleString('en-IN');clearInterval(t);}
+      },28);
+    });
+    animCount('totalRaised',0,causeConfig.driver.raised+causeConfig.health.raised+causeConfig.social.raised);
+    animCount('totalDonors',0,causeConfig.driver.donors+causeConfig.health.donors+causeConfig.social.donors,false);
+    careObs.unobserve(e.target);
+  });
+},{threshold:0.15});
+const cs=document.getElementById('care'); if(cs) careObs.observe(cs);
+
+function animCount(id,from,to,rupee=true){
+  const el=document.getElementById(id); if(!el) return;
+  let cur=from; const step=Math.max(1,Math.floor(to/80));
+  const t=setInterval(()=>{
+    cur=Math.min(cur+step,to);
+    el.textContent=rupee?'&#8377;'+Math.round(cur/1000)+'K+':cur.toLocaleString('en-IN')+'+';
+    if(cur>=to){el.textContent=rupee?'&#8377;'+Math.round(to/1000)+'K+':to.toLocaleString('en-IN')+'+';clearInterval(t);}
+  },22);
+}
+
+function selectAmt(btn,cause,amt){
+  selectedAmt[cause]=amt;
+  document.getElementById('custom-'+cause).value='';
+  const all=btn.closest('.cause-amounts').querySelectorAll('.amt-btn');
+  const color=causeConfig[cause].color;
+  all.forEach(b=>{b.style.background='';b.style.borderColor='';b.style.color='';});
+  btn.style.background=color;btn.style.borderColor=color;btn.style.color='#fff';
+}
+
+function customAmt(cause,val){
+  selectedAmt[cause]=parseInt(val)||0;
+  const all=document.querySelector('[data-cause="'+cause+'"]').querySelectorAll('.amt-btn');
+  all.forEach(b=>{b.style.background='';b.style.borderColor='';b.style.color='';});
+}
+
+function donateTo(cause){
+  const amt=selectedAmt[cause];
+  if(!amt||amt<10){alert('Minimum ₹10 donate karein');return;}
+  const cfg=causeConfig[cause];
+  const rzp=new Razorpay({
+    key:RZP_KEY, amount:amt*100, currency:'INR',
+    name:'Sppero Care', description:cfg.name,
+    handler:function(resp){
+      causeConfig[cause].raised+=amt; causeConfig[cause].donors+=1;
+      updateCause(cause);
+      document.getElementById('modalMsg').textContent='Aapne ₹'+amt+' "'+cfg.name+'" mein donate kiya. Payment ID: '+resp.razorpay_payment_id+'. Dil se shukriya — aap bahut fark kar rahe hain! 💚';
+      document.getElementById('careModal').classList.add('open');
+    },
+    notes:{cause:cause,platform:'sppero_care_website'},
+    theme:{color:cfg.color},
+  });
+  rzp.on('payment.failed',function(r){alert('Payment fail hua: '+(r.error&&r.error.description||'Please try again'));});
+  rzp.open();
+}
+
+function updateCause(cause){
+  const cfg=causeConfig[cause], pfx={driver:'dr',health:'hl',social:'sw'}[cause];
+  const pct=Math.min(100,cfg.raised/cfg.goal*100).toFixed(1);
+  document.getElementById(pfx+'-raised').textContent='₹'+cfg.raised.toLocaleString('en-IN');
+  document.getElementById(pfx+'-bar').style.width=pct+'%';
+  document.getElementById(pfx+'-donors').textContent='🤝 '+cfg.donors+' donors · '+pct+'% funded';
+}
+
+function closeCareModal(){document.getElementById('careModal').classList.remove('open');}
+document.getElementById('careModal').addEventListener('click',e=>{if(e.target===document.getElementById('careModal'))closeCareModal();});
+
+function spawnParticles(id,color){
+  const c=document.getElementById(id); if(!c) return;
+  for(let i=0;i<10;i++){
+    const p=document.createElement('div'); p.className='care-p';
+    const sz=4+Math.random()*7;
+    p.style.cssText='width:'+sz+'px;height:'+sz+'px;background:rgba(255,255,255,.8);left:'+Math.random()*100+'%;bottom:-20px;animation-duration:'+(4+Math.random()*6)+'s;animation-delay:'+(Math.random()*5)+'s';
+    c.appendChild(p);
+  }
+}
+spawnParticles('p-driver'); spawnParticles('p-health'); spawnParticles('p-social');
 </script>
 </body>
 </html>
