@@ -844,8 +844,13 @@ function animCount(id,from,to,rupee=true){
   let cur=from; const step=Math.max(1,Math.floor(to/80));
   const t=setInterval(()=>{
     cur=Math.min(cur+step,to);
-    el.textContent=rupee?'&#8377;'+Math.round(cur/1000)+'K+':cur.toLocaleString('en-IN')+'+';
-    if(cur>=to){el.textContent=rupee?'&#8377;'+Math.round(to/1000)+'K+':to.toLocaleString('en-IN')+'+';clearInterval(t);}
+    // ₹ is the rupee sign as a JS escape, NOT the &#8377; HTML entity.
+    // textContent does not decode entities, so assigning '&#8377;' here printed
+    // those eight characters literally on the page. The escape keeps this file
+    // ASCII-only — which is why entities are used in the markup — while still
+    // producing a real rupee sign.
+    el.textContent=rupee?'\u20B9'+Math.round(cur/1000)+'K+':cur.toLocaleString('en-IN')+'+';
+    if(cur>=to){el.textContent=rupee?'\u20B9'+Math.round(to/1000)+'K+':to.toLocaleString('en-IN')+'+';clearInterval(t);}
   },22);
 }
 
