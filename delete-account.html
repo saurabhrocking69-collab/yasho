@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Delete Your Account — Sppero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#e94560;--dark:#1a1a2e;--dark3:#0f3460;--white:#fff;--gray:#6c757d;--light:#f8f9fa;--border:#e9ecef}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.logo span{color:var(--red)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--red);color:#fff !important;padding:8px 20px;border-radius:25px;font-weight:700 !important}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+.page-hero{background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:120px 0 60px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(233,69,96,.15),transparent 60%)}
+.page-hero-inner{position:relative;z-index:1}
+.page-tag{display:inline-block;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);color:var(--red);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px}
+.page-title{font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;margin-bottom:14px;letter-spacing:-1.5px}
+.page-sub{font-size:16px;color:rgba(255,255,255,.55);max-width:500px;margin:0 auto}
+.container{max-width:820px;margin:0 auto;padding:0 24px}
+.content{padding:64px 0 80px}
+.policy-date{font-size:13px;color:var(--gray);margin-bottom:36px;padding-bottom:20px;border-bottom:2px solid var(--border)}
+h2{font-size:22px;font-weight:800;color:var(--dark);margin:40px 0 14px;letter-spacing:-.5px}
+h3{font-size:17px;font-weight:700;color:var(--dark);margin:24px 0 10px}
+p{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:14px}
+ul{margin:10px 0 20px 20px}
+ul li{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:6px;list-style:disc}
+.info-box{background:linear-gradient(135deg,rgba(233,69,96,.06),rgba(15,52,96,.04));border-left:4px solid var(--red);border-radius:0 12px 12px 0;padding:16px 20px;margin:22px 0;font-size:14px;color:var(--dark);line-height:1.7}
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;border-radius:12px;overflow:hidden;border:2px solid var(--border);font-size:14px}
+.data-table th{background:var(--dark);color:#fff;padding:13px 16px;font-weight:700;text-align:left}
+.data-table td{padding:12px 16px;color:var(--gray);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--light)}
+footer{background:#0a0a1a;padding:40px 0 24px;color:rgba(255,255,255,.4);text-align:center;font-size:13px}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:rgba(255,255,255,.45);transition:color .2s}
+.footer-links a:hover{color:#fff}
+.fl{font-size:20px;font-weight:900;color:#fff;margin-bottom:16px;display:block}
+.fl span{color:var(--red)}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:rgba(26,26,46,.98);flex-direction:column;padding:20px 24px;gap:16px;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Sppero<span>.</span></a>
+    <button class="nav-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="cancellation.html">Cancellation</a></li>
+      <li><a href="contact.html">Contact</a>
+      <a href="delete-account.html">Delete Account</a></li>
+      <li><a href="index.html#download" class="nav-cta">Download App</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">Account</div>
+    <h1 class="page-title">Delete Your Account</h1>
+    <p class="page-sub">How to permanently delete your Sppero account and the data attached to it.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="content">
+    <p class="policy-date">Applies to <strong>Sppero</strong> (rider app) and <strong>Sppero Buddy</strong> (driver app) &nbsp;·&nbsp; Last updated: 5 August 2026</p>
+
+    <div class="info-box">
+      <strong>The fastest way is inside the app.</strong> Your account is deleted within
+      <strong>7 days</strong> of the request, and you can cancel any time before it goes through.
+    </div>
+
+    <h2>1. Delete from inside the app</h2>
+    <h3>Sppero (rider app)</h3>
+    <ul>
+      <li>Open the app and go to the <strong>Profile</strong> tab</li>
+      <li>Scroll to <strong>Legal</strong> and tap <strong>Delete account</strong></li>
+      <li>Read what will be removed, then confirm</li>
+    </ul>
+    <p>You can also reach it from <strong>Support &rarr; Delete Account</strong>.</p>
+
+    <h3>Sppero Buddy (driver app)</h3>
+    <ul>
+      <li>Open the app and go to <strong>Profile</strong></li>
+      <li>Tap <strong>Delete Account</strong></li>
+      <li>Read what will be removed, then confirm</li>
+    </ul>
+    <p>You can also reach it from <strong>Support &rarr; Delete Account</strong>.</p>
+
+    <h2>2. If you can no longer sign in</h2>
+    <p>
+      If you have uninstalled the app or cannot access your account, email us from the
+      phone number or address registered on the account and we will process it for you:
+    </p>
+    <ul>
+      <li>📧 <a href="mailto:privacy@sppero.com?subject=Account%20deletion%20request" style="color:var(--red)">privacy@sppero.com</a></li>
+      <li>🌐 <a href="contact.html" style="color:var(--red)">Contact form</a></li>
+    </ul>
+    <p>
+      Please include the <strong>mobile number registered on the account</strong> so we can
+      identify it. We may ask you to confirm ownership of that number before deleting
+      anything &mdash; this protects you from someone else deleting your account.
+    </p>
+
+    <h2>3. What gets deleted</h2>
+    <ul>
+      <li>Your name, mobile number and profile</li>
+      <li>Your saved places and emergency contacts</li>
+      <li>Driver accounts: driving licence, Aadhaar, vehicle documents and payout details</li>
+      <li>Your login &mdash; you will not be able to sign in again</li>
+    </ul>
+
+    <h2>4. What we keep, and why</h2>
+    <p>
+      We keep <strong>trip and payment records with your personal details removed</strong>, so
+      they can no longer be linked back to you. Two reasons we cannot simply erase them:
+    </p>
+    <ul>
+      <li>Indian tax and accounting rules require invoice and payment records to be retained</li>
+      <li>Every ride has two people on it &mdash; the other person keeps their own trip history, and deleting yours would take part of theirs with it</li>
+    </ul>
+
+    <h2>5. Before you delete</h2>
+    <table class="data-table">
+      <thead><tr><th>Situation</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>You have a ride in progress</td>
+          <td>Finish or cancel the ride first &mdash; the request cannot be accepted while one is running.</td>
+        </tr>
+        <tr>
+          <td>You have wallet balance</td>
+          <td><strong>It will be forfeited.</strong> It is not refundable once the account is deleted, so withdraw or spend it first.</td>
+        </tr>
+        <tr>
+          <td>You are a driver with commission due</td>
+          <td>Clear the outstanding amount first. Deleting an account does not cancel money owed.</td>
+        </tr>
+        <tr>
+          <td>You change your mind</td>
+          <td>Cancel from the same screen any time within the 7 days. Nothing is lost.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. How long it takes</h2>
+    <p>
+      Requests are reviewed and completed within <strong>7 days</strong>. You will get a
+      notification when the request is received and again when it is done. Anonymised trip
+      and payment records are retained for the period required by Indian tax law.
+    </p>
+
+    <h2>7. Questions</h2>
+    <ul>
+      <li>📧 <a href="mailto:privacy@sppero.com" style="color:var(--red)">privacy@sppero.com</a></li>
+      <li>📧 <a href="mailto:support@sppero.com" style="color:var(--red)">support@sppero.com</a></li>
+      <li>🌐 <a href="privacy.html" style="color:var(--red)">Privacy Policy</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width:900px;margin:0 auto;padding:0 24px">
+    <span class="fl">Sppero<span>.</span></span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cancellation.html">Cancellation</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>© 2025 Sppero · Made with ❤️ in India</p>
+  </div>
+</footer>
+</body>
+</html>
+
