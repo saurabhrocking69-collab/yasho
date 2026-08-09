@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Earn with Sppero — Partner Programme</title>
+<meta name="description" content="Bring drivers and customers to Sppero and earn a share of every ride they take. Join free, track your earnings, withdraw from ₹200.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#e94560;--dark:#1a1a2e;--dark2:#16213e;--dark3:#0f3460;--white:#fff;--gray:#6c757d;--light:#f8f9fa;--border:#e9ecef;--green:#4CAF50;--gold:#f59e0b}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.logo span{color:var(--red)}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500}
+.nav-links a:hover{color:#fff}
+#logoutBtn{display:none;background:rgba(255,255,255,.1);color:#fff!important;padding:7px 16px;border-radius:20px;border:0;font:inherit;font-size:13px;cursor:pointer}
+
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 45%,#0f3460 100%);padding:120px 24px 70px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(233,69,96,.18) 0%,transparent 65%)}
+.hero-in{max-width:1000px;margin:0 auto;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);color:var(--red);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:20px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+h1{font-size:clamp(32px,5.5vw,54px);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:16px}
+h1 em{font-style:normal;color:var(--red)}
+.sub{color:rgba(255,255,255,.72);font-size:17px;line-height:1.7;max-width:560px}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.sec{padding:52px 0}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 2px 14px rgba(26,26,46,.05)}
+h2{font-size:26px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+.muted{color:var(--gray);font-size:14px;line-height:1.6}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:26px}
+.step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px}
+.step b{display:block;color:#fff;font-size:15px;margin-bottom:5px}
+.step p{color:rgba(255,255,255,.65);font-size:13.5px;line-height:1.55}
+.step i{font-style:normal;color:var(--red);font-weight:800;font-size:12px;letter-spacing:.1em}
+
+label{display:block;font-size:13px;font-weight:600;margin-bottom:5px;color:var(--dark)}
+input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font:inherit;font-size:15px;background:#fff;color:var(--dark)}
+input:focus,select:focus{outline:none;border-color:var(--red)}
+.fg{margin-bottom:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{background:var(--red);color:#fff;border:0;padding:13px 26px;border-radius:25px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(233,69,96,.35)}
+.btn:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}
+.btn-ghost{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+.link{color:var(--red);font-weight:600;cursor:pointer;font-size:14px;background:none;border:0;font-family:inherit;padding:0}
+
+.msg{padding:11px 14px;border-radius:10px;font-size:14px;margin-bottom:14px;display:none}
+.msg.err{background:#fdecea;color:#b3261e;border:1px solid #f5c6c2;display:block}
+.msg.ok{background:#e8f5e9;color:#1b5e20;border:1px solid #c8e6c9;display:block}
+
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;border-bottom:1px solid var(--border);padding-bottom:12px}
+.tab{background:none;border:0;font:inherit;font-size:14px;font-weight:600;color:var(--gray);padding:8px 14px;border-radius:20px;cursor:pointer}
+.tab.on{background:var(--red);color:#fff}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:var(--light);border-radius:14px;padding:18px}
+.stat .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+.stat .v{font-size:25px;font-weight:900;letter-spacing:-.6px;margin-top:4px}
+.stat.hot .v{color:var(--green)}
+
+.codebox{background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff;border-radius:16px;padding:22px;text-align:center;margin-bottom:22px}
+.codebox .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.codebox .code{font-size:34px;font-weight:900;letter-spacing:3px;margin:6px 0 12px}
+.codebox .btn-sm{margin:0 4px}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);font-weight:700;white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+.pill{display:inline-block;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700}
+.pill.hold{background:#fff3d9;color:#8a5300}
+.pill.ok{background:#e8f5e9;color:#1b5e20}
+.pill.proc{background:#e3f2fd;color:#0d47a1}
+.pill.rej{background:#fdecea;color:#b3261e}
+.empty{padding:26px;text-align:center;color:var(--gray);font-size:14px}
+
+footer{background:var(--dark);color:rgba(255,255,255,.6);padding:34px 24px;text-align:center;font-size:13px;line-height:1.9;margin-top:40px}
+footer a{color:rgba(255,255,255,.8)}
+.terms{font-size:11.5px;color:var(--gray);line-height:1.65;margin-top:16px}
+@media(max-width:640px){.row2{grid-template-columns:1fr}.nav-links li:not(:last-child){display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Sppero<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button id="logoutBtn" onclick="logout()">Log out</button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ PUBLIC: the pitch ══ -->
+<div id="pitch">
+  <section class="hero">
+    <div class="hero-in">
+      <span class="badge"><span class="dot"></span> Partner Programme</span>
+      <h1>Bring people to Sppero.<br><em>Earn from every ride they take.</em></h1>
+      <p class="sub">Install the Sppero app for a driver or a customer, add their number here, and you earn a share of what Sppero makes on their rides — for as long as they keep riding.</p>
+      <div class="steps">
+        <div class="step"><i>STEP 1</i><b>Join free</b><p>Your name, your number, a password. Nothing else, and no fee — ever.</p></div>
+        <div class="step"><i>STEP 2</i><b>Get people on Sppero</b><p>Share your code, or add the numbers you installed for and we verify them.</p></div>
+        <div class="step"><i>STEP 3</i><b>Earn on their rides</b><p>Every completed ride adds to your balance. Watch it here, ride by ride.</p></div>
+        <div class="step"><i>STEP 4</i><b>Withdraw from ₹200</b><p>Straight to your UPI or bank account.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap" style="max-width:520px">
+      <div class="card">
+        <div class="tabs" style="border:0;padding:0">
+          <button class="tab on" id="t-join"  onclick="showForm('join',this)">Join</button>
+          <button class="tab"    id="t-login" onclick="showForm('login',this)">Log in</button>
+        </div>
+
+        <div id="f-join">
+          <h2>Become a partner</h2>
+          <p class="muted" style="margin-bottom:18px">Takes a minute. Bank details are only needed when you withdraw.</p>
+          <div class="msg" id="joinMsg"></div>
+          <div class="fg"><label>Your name</label><input id="jName" autocomplete="name"></div>
+          <div class="fg"><label>Mobile number</label><input id="jPhone" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="10 digits"></div>
+          <div class="fg"><label>Password</label><input id="jPass" type="password" autocomplete="new-password" placeholder="At least 6 characters"></div>
+          <div class="fg"><label>Security question <span style="font-weight:400;color:var(--gray)">— used if you forget your password</span></label>
+            <select id="jQ"></select></div>
+          <div class="fg"><label>Your answer</label><input id="jA" autocomplete="off"></div>
+          <label style="display:flex;gap:9px;align-items:flex-start;font-weight:400;font-size:13px;line-height:1.5;margin-bottom:16px">
+            <input type="checkbox" id="jTerms" style="width:auto;margin-top:3px">
+            <span>I accept the partner terms below.</span></label>
+          <button class="btn" style="width:100%" id="jBtn" onclick="doJoin()">Create my partner account</button>
+        </div>
+
+        <div id="f-login" style="display:none">
+          <h2>Welcome back</h2>
+          <p class="muted" style="margin-bottom:18px">Log in to see your earnings.</p>
+          <div class="msg" id="loginMsg"></div>
+          <div class="fg"><label>Mobile number</label><input id="lPhone" inputmode="numeric" maxlength="10" autocomplete="tel"></div>
+          <div class="fg"><label>Password</label><input id="lPass" type="password" autocomplete="current-password"></div>
+          <button class="btn" style="width:100%" onclick="doLogin()">Log in</button>
+          <p style="margin-top:12px;text-align:center"><button class="link" onclick="showForm('forgot')">Forgot password?</button></p>
+        </div>
+
+        <div id="f-forgot" style="display:none">
+          <h2>Reset your password</h2>
+          <p class="muted" style="margin-bottom:18px">Answer your security question to set a new one.</p>
+          <div class="msg" id="fMsg"></div>
+          <div class="fg"><label>Mobile number</label><input id="fPhone" inputmode="numeric" maxlength="10"></div>
+          <div id="fStep1"><button class="btn" style="width:100%" onclick="doForgot()">Continue</button></div>
+          <div id="fStep2" style="display:none">
+            <div class="fg"><label id="fQLabel"></label><input id="fA"></div>
+            <div class="fg"><label>New password</label><input id="fPass" type="password" placeholder="At least 6 characters"></div>
+            <button class="btn" style="width:100%" onclick="doReset()">Set new password</button>
+          </div>
+          <p style="margin-top:12px;text-align:center"><button class="link" onclick="showForm('login')">Back to log in</button></p>
+        </div>
+
+        <p class="terms" id="termsText"></p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PRIVATE: the dashboard ══ -->
+<div id="app" style="display:none">
+  <section class="hero" style="padding:110px 24px 44px">
+    <div class="hero-in">
+      <span class="badge"><span class="dot"></span> <span id="hiName">Partner</span></span>
+      <h1 style="font-size:clamp(26px,4vw,38px)">Your earnings</h1>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="codebox">
+        <div class="k">Your referral code</div>
+        <div class="code" id="myCode">—</div>
+        <button class="btn btn-sm" onclick="copyCode()">Copy code</button>
+        <button class="btn btn-sm btn-ghost" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)" onclick="shareLink()">Share link</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="k">Total earned</div><div class="v" id="sLife">₹0</div></div>
+        <div class="stat hot"><div class="k">Ready to withdraw</div><div class="v" id="sAvail">₹0</div></div>
+        <div class="stat"><div class="k">Still clearing</div><div class="v" id="sHold">₹0</div></div>
+        <div class="stat"><div class="k">This month</div><div class="v" id="sMonth">₹0</div></div>
+        <div class="stat"><div class="k">People brought</div><div class="v" id="sPeople">0</div></div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab on" id="v-people"   onclick="showView('people',this)">My people</button>
+        <button class="tab"    id="v-earnings" onclick="showView('earnings',this)">Every ride</button>
+        <button class="tab"    id="v-add"      onclick="showView('add',this)">Add numbers</button>
+        <button class="tab"    id="v-money"    onclick="showView('money',this)">Withdraw</button>
+      </div>
+
+      <div id="w-people" class="card">
+        <h2>People you brought</h2>
+        <p class="muted" style="margin-bottom:16px">Numbers are part-hidden for their privacy.</p>
+        <div class="scroll"><table><thead><tr><th>Person</th><th>Type</th><th class="n">Rides</th><th class="n">You earned</th></tr></thead>
+        <tbody id="peopleBody"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody></table></div>
+      </div>
+
+      <div id="w-earnings" class="card" style="display:none">
+        <h2>Every ride, one by one</h2>
+        <p class="muted" style="margin-bottom:16px">Earnings clear a few days after the ride, then you can withdraw them.</p>
+        <div class="scroll"><table><thead><tr><th>Date</th><th>Ride</th><th class="n">Fare</th><th class="n">Sppero fee</th><th class="n">Your share</th><th>Status</th></tr></thead>
+        <tbody id="earnBody"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody></table></div>
+      </div>
+
+      <div id="w-add" class="card" style="display:none">
+        <h2>Add numbers you installed for</h2>
+        <p class="muted" style="margin-bottom:16px">If someone joined without using your code, add their number here and Sppero will check it. They must already have a Sppero account.</p>
+        <div class="msg" id="claimMsg"></div>
+        <div class="row2" style="margin-bottom:14px">
+          <div><label>Their mobile number</label><input id="cPhone" inputmode="numeric" maxlength="10"></div>
+          <div><label>They are a</label><select id="cRole"><option value="driver">Driver</option><option value="passenger">Customer</option></select></div>
+        </div>
+        <button class="btn" onclick="submitClaim()">Submit for verification</button>
+        <div class="scroll" style="margin-top:22px"><table><thead><tr><th>Number</th><th>Submitted</th><th>Status</th></tr></thead>
+        <tbody id="claimBody"><tr><td colspan="3" class="empty">Nothing submitted yet.</td></tr></tbody></table></div>
+      </div>
+
+      <div id="w-money" class="card" style="display:none">
+        <h2>Withdraw your earnings</h2>
+        <p class="muted" style="margin-bottom:16px" id="moneyHint"></p>
+        <div class="msg" id="moneyMsg"></div>
+        <div class="row2">
+          <div class="fg"><label>PAN</label><input id="mPan" maxlength="10" placeholder="ABCDE1234F" style="text-transform:uppercase"></div>
+          <div class="fg"><label>UPI ID</label><input id="mUpi" placeholder="yourname@upi"></div>
+        </div>
+        <p class="muted" style="margin:-4px 0 14px">Or a bank account instead of UPI:</p>
+        <div class="row2">
+          <div class="fg"><label>Account number</label><input id="mAcct"></div>
+          <div class="fg"><label>IFSC</label><input id="mIfsc" style="text-transform:uppercase"></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="saveBank()">Save payment details</button>
+        <hr style="border:0;border-top:1px solid var(--border);margin:22px 0">
+        <button class="btn" id="wBtn" onclick="requestWithdraw()">Withdraw</button>
+        <div class="scroll" style="margin-top:22px"><table><thead><tr><th>Requested</th><th class="n">Amount</th><th class="n">TDS</th><th class="n">You get</th><th>Status</th></tr></thead>
+        <tbody id="payBody"><tr><td colspan="5" class="empty">No withdrawals yet.</td></tr></tbody></table></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div><a href="index.html">Sppero</a> · <a href="contact.html">Contact</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a></div>
+  <div style="margin-top:8px">© 2026 Sppero. All rights reserved.</div>
+</footer>
+
+<script>
+var API = 'https://api.sppero.com';
+var TOK = localStorage.getItem('sp_partner_token') || '';
+var CFG = { rate_percent: 60, min_payout: 200, hold_days: 7 };
+var ME = null;
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function rs(n){ return '₹' + Math.round((parseFloat(n)||0)*100)/100; }
+function say(id, text, kind){ var el=document.getElementById(id); el.className='msg '+(kind||'err'); el.textContent=text; }
+function clear(id){ var el=document.getElementById(id); el.className='msg'; el.textContent=''; }
+
+async function api(path, opts){
+  opts = opts || {};
+  var headers = { 'Content-Type':'application/json' };
+  if (TOK) headers.Authorization = 'Bearer ' + TOK;
+  var r = await fetch(API + path, { method: opts.method || 'GET', headers: headers,
+                                    body: opts.body ? JSON.stringify(opts.body) : undefined });
+  var d = await r.json().catch(function(){ return {}; });
+  // A dead token should drop you at the login form, not at a blank dashboard.
+  if (r.status === 401 && TOK) { logout(); throw new Error('Please log in again'); }
+  if (!r.ok) throw new Error(d.error || 'Something went wrong. Please try again.');
+  return d;
+}
+
+function showForm(which, btn){
+  ['join','login','forgot'].forEach(function(f){
+    document.getElementById('f-'+f).style.display = (f===which) ? '' : 'none'; });
+  document.querySelectorAll('#pitch .tab').forEach(function(b){ b.classList.remove('on'); });
+  if (btn) btn.classList.add('on');
+  else if (which==='login') document.getElementById('t-login').classList.add('on');
+}
+
+function showView(which, btn){
+  ['people','earnings','add','money'].forEach(function(v){
+    document.getElementById('w-'+v).style.display = (v===which) ? '' : 'none'; });
+  document.querySelectorAll('#app .tab').forEach(function(b){ b.classList.remove('on'); });
+  if (btn) btn.classList.add('on');
+  if (which==='people') loadPeople();
+  if (which==='earnings') loadEarnings();
+  if (which==='add') loadClaims();
+  if (which==='money') loadMoney();
+}
+
+// ── Public ──
+async function boot(){
+  try {
+    CFG = await api('/api/partner/config');
+    var sel = document.getElementById('jQ');
+    sel.innerHTML = (CFG.security_questions||[]).map(function(q){
+      return '<option value="'+esc(q)+'">'+esc(q)+'</option>'; }).join('');
+    document.getElementById('termsText').innerHTML =
+      'You earn ' + CFG.rate_percent + '% of the commission Sppero earns on rides taken by people you bring, '
+      + 'for as long as they keep riding. Earnings clear ' + CFG.hold_days + ' days after each ride and can be '
+      + 'withdrawn from ₹' + CFG.min_payout + '. You earn only from people you personally bring — never from '
+      + 'people they bring. Sppero may change the commission share, the programme and this policy at any time; '
+      + 'changes apply to rides from that date onward and never reduce what you have already earned. Payments are '
+      + 'commission and are taxable — TDS applies once you cross ₹15,000 in a financial year, and PAN is required '
+      + 'before your first withdrawal. Fake or self-referred accounts forfeit their earnings.';
+  } catch(e){ /* the pitch still reads fine without live settings */ }
+  if (TOK) { openApp(); }
+}
+
+async function doJoin(){
+  clear('joinMsg');
+  var btn = document.getElementById('jBtn'); btn.disabled = true;
+  try {
+    if (!document.getElementById('jTerms').checked) throw new Error('Please accept the terms to continue');
+    var d = await api('/api/partner/signup', { method:'POST', body:{
+      name: document.getElementById('jName').value,
+      phone: document.getElementById('jPhone').value,
+      password: document.getElementById('jPass').value,
+      security_q: document.getElementById('jQ').value,
+      security_a: document.getElementById('jA').value,
+      accept_terms: true }});
+    TOK = d.token; localStorage.setItem('sp_partner_token', TOK);
+    openApp();
+  } catch(e){ say('joinMsg', e.message); }
+  btn.disabled = false;
+}
+
+async function doLogin(){
+  clear('loginMsg');
+  try {
+    var d = await api('/api/partner/login', { method:'POST', body:{
+      phone: document.getElementById('lPhone').value,
+      password: document.getElementById('lPass').value }});
+    TOK = d.token; localStorage.setItem('sp_partner_token', TOK);
+    openApp();
+  } catch(e){ say('loginMsg', e.message); }
+}
+
+async function doForgot(){
+  clear('fMsg');
+  try {
+    var d = await api('/api/partner/forgot', { method:'POST', body:{ phone: document.getElementById('fPhone').value }});
+    document.getElementById('fQLabel').textContent = d.security_q;
+    document.getElementById('fStep1').style.display = 'none';
+    document.getElementById('fStep2').style.display = '';
+  } catch(e){ say('fMsg', e.message); }
+}
+
+async function doReset(){
+  clear('fMsg');
+  try {
+    var d = await api('/api/partner/reset', { method:'POST', body:{
+      phone: document.getElementById('fPhone').value,
+      security_a: document.getElementById('fA').value,
+      password: document.getElementById('fPass').value }});
+    TOK = d.token; localStorage.setItem('sp_partner_token', TOK);
+    openApp();
+  } catch(e){ say('fMsg', e.message); }
+}
+
+function logout(){
+  TOK = ''; localStorage.removeItem('sp_partner_token');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('pitch').style.display = '';
+  document.getElementById('logoutBtn').style.display = 'none';
+  window.scrollTo(0,0);
+}
+
+// ── Private ──
+async function openApp(){
+  try {
+    var d = await api('/api/partner/dashboard');
+    ME = d;
+    document.getElementById('pitch').style.display = 'none';
+    document.getElementById('app').style.display = '';
+    document.getElementById('logoutBtn').style.display = '';
+    document.getElementById('hiName').textContent = d.partner.name;
+    document.getElementById('myCode').textContent = d.partner.code;
+    var b = d.balances;
+    document.getElementById('sLife').textContent  = rs(b.lifetime);
+    document.getElementById('sAvail').textContent = rs(b.available);
+    document.getElementById('sHold').textContent  = rs(b.holding);
+    document.getElementById('sMonth').textContent = rs(b.this_month);
+    document.getElementById('sPeople').textContent = (d.counts.driver||0) + (d.counts.passenger||0);
+    showView('people', document.getElementById('v-people'));
+    window.scrollTo(0,0);
+  } catch(e){ logout(); }
+}
+
+function copyCode(){
+  var c = document.getElementById('myCode').textContent;
+  navigator.clipboard.writeText(c).then(function(){ alert('Code copied: ' + c); },
+                                        function(){ alert('Your code is ' + c); });
+}
+function shareLink(){
+  var url = 'https://sppero.com/partner.html?code=' + encodeURIComponent(document.getElementById('myCode').textContent);
+  var text = 'Download Sppero and use my code ' + document.getElementById('myCode').textContent + ' — ' + url;
+  if (navigator.share) navigator.share({ title:'Sppero', text:text }).catch(function(){});
+  else navigator.clipboard.writeText(text).then(function(){ alert('Link copied — paste it in WhatsApp'); },
+                                                function(){ alert(text); });
+}
+
+async function loadPeople(){
+  var b = document.getElementById('peopleBody');
+  try {
+    var rows = await api('/api/partner/people');
+    b.innerHTML = rows.length ? rows.map(function(p){
+      return '<tr><td>'+esc(p.name)+'<br><span style="color:var(--gray);font-size:12px">'+esc(p.phone)+'</span></td>'
+        + '<td>'+(p.role==='driver'?'Driver':'Customer')+'</td>'
+        + '<td class="n">'+p.rides+'</td>'
+        + '<td class="n" style="font-weight:700;color:var(--green)">'+rs(p.earned)+'</td></tr>';
+    }).join('') : '<tr><td colspan="4" class="empty">Nobody yet. Share your code to get started.</td></tr>';
+  } catch(e){ b.innerHTML = '<tr><td colspan="4" class="empty">'+esc(e.message)+'</td></tr>'; }
+}
+
+async function loadEarnings(){
+  var b = document.getElementById('earnBody');
+  try {
+    var rows = await api('/api/partner/earnings?limit=100');
+    b.innerHTML = rows.length ? rows.map(function(r){
+      var pill = r.state==='holding' ? '<span class="pill hold">Clearing</span>'
+               : r.state==='paid' ? '<span class="pill ok">Paid</span>'
+               : r.state==='processing' ? '<span class="pill proc">Processing</span>'
+               : r.state==='reversed' ? '<span class="pill rej">Cancelled</span>'
+               : '<span class="pill ok">Ready</span>';
+      var d = new Date(r.date).toLocaleDateString('en-IN',{day:'2-digit',month:'short'});
+      return '<tr><td>'+d+'</td><td>'+esc(r.vehicle||'Ride')
+        + '<br><span style="color:var(--gray);font-size:12px">via '+esc(r.through)+'</span></td>'
+        + '<td class="n">'+rs(r.fare)+'</td><td class="n">'+rs(r.commission)+'</td>'
+        + '<td class="n" style="font-weight:700;color:var(--green)">'+rs(r.amount)
+        + (r.shared_with ? '<br><span style="color:var(--gray);font-size:11px;font-weight:400">split '+r.shared_with+' ways</span>' : '')
+        + '</td><td>'+pill+'</td></tr>';
+    }).join('') : '<tr><td colspan="6" class="empty">No rides yet.</td></tr>';
+  } catch(e){ b.innerHTML = '<tr><td colspan="6" class="empty">'+esc(e.message)+'</td></tr>'; }
+}
+
+async function loadClaims(){
+  var b = document.getElementById('claimBody');
+  try {
+    var rows = await api('/api/partner/claims');
+    b.innerHTML = rows.length ? rows.map(function(c){
+      var pill = c.status==='approved' ? '<span class="pill ok">Approved</span>'
+               : c.status==='rejected' ? '<span class="pill rej">Not approved</span>'
+               : '<span class="pill hold">Checking</span>';
+      return '<tr><td>'+esc(c.phone)+'</td>'
+        + '<td>'+new Date(c.created_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short'})+'</td>'
+        + '<td>'+pill+(c.admin_note?'<br><span style="color:var(--gray);font-size:12px">'+esc(c.admin_note)+'</span>':'')+'</td></tr>';
+    }).join('') : '<tr><td colspan="3" class="empty">Nothing submitted yet.</td></tr>';
+  } catch(e){ b.innerHTML = '<tr><td colspan="3" class="empty">'+esc(e.message)+'</td></tr>'; }
+}
+
+async function submitClaim(){
+  clear('claimMsg');
+  try {
+    var d = await api('/api/partner/claims', { method:'POST', body:{
+      phone: document.getElementById('cPhone').value,
+      role: document.getElementById('cRole').value }});
+    say('claimMsg', d.message || 'Submitted.', 'ok');
+    document.getElementById('cPhone').value = '';
+    loadClaims();
+  } catch(e){ say('claimMsg', e.message); }
+}
+
+async function loadMoney(){
+  clear('moneyMsg');
+  var hint = document.getElementById('moneyHint');
+  try {
+    var d = await api('/api/partner/dashboard');
+    ME = d;
+    hint.textContent = 'You have ' + rs(d.balances.available) + ' ready. The minimum withdrawal is ₹'
+      + d.min_payout + '. PAN is required by law on commission payments.';
+    document.getElementById('wBtn').disabled = !d.can_withdraw;
+    var p = d.partner;
+    if (p.has_pan) document.getElementById('mPan').placeholder = 'Saved';
+    var pays = await api('/api/partner/payouts');
+    var b = document.getElementById('payBody');
+    b.innerHTML = pays.length ? pays.map(function(x){
+      var pill = x.status==='paid' ? '<span class="pill ok">Paid</span>'
+               : x.status==='rejected' ? '<span class="pill rej">Not approved</span>'
+               : '<span class="pill proc">Being processed</span>';
+      return '<tr><td>'+new Date(x.requested_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short'})+'</td>'
+        + '<td class="n">'+rs(x.gross)+'</td><td class="n">'+(parseFloat(x.tds)>0?rs(x.tds):'—')+'</td>'
+        + '<td class="n" style="font-weight:700">'+rs(x.net)+'</td><td>'+pill+'</td></tr>';
+    }).join('') : '<tr><td colspan="5" class="empty">No withdrawals yet.</td></tr>';
+  } catch(e){ say('moneyMsg', e.message); }
+}
+
+async function saveBank(){
+  clear('moneyMsg');
+  try {
+    var d = await api('/api/partner/bank', { method:'POST', body:{
+      pan: document.getElementById('mPan').value,
+      upi_id: document.getElementById('mUpi').value,
+      bank_account: document.getElementById('mAcct').value,
+      bank_ifsc: document.getElementById('mIfsc').value }});
+    say('moneyMsg', d.held_hours
+      ? 'Saved. For your security, withdrawals open again in ' + d.held_hours + ' hours after a payment-details change.'
+      : 'Saved.', 'ok');
+    loadMoney();
+  } catch(e){ say('moneyMsg', e.message); }
+}
+
+async function requestWithdraw(){
+  clear('moneyMsg');
+  var btn = document.getElementById('wBtn'); btn.disabled = true;
+  try {
+    var d = await api('/api/partner/withdraw', { method:'POST' });
+    say('moneyMsg', d.message || 'Withdrawal requested.', 'ok');
+    openApp(); loadMoney();
+  } catch(e){ say('moneyMsg', e.message); btn.disabled = false; }
+}
+
+// A shared link carries the code — show it to whoever opened it, since they
+// still have to type it into the app at signup.
+(function(){
+  var m = location.search.match(/[?&]code=([A-Za-z0-9]+)/);
+  if (m) {
+    var el = document.createElement('div');
+    el.className = 'badge';
+    el.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:1000;background:#1a1a2e;color:#fff;border-color:rgba(255,255,255,.2)';
+    el.textContent = 'Use code ' + m[1] + ' when you sign up in the Sppero app';
+    document.body.appendChild(el);
+  }
+})();
+
+boot();
+</script>
+</body>
+</html>
