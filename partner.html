@@ -114,7 +114,7 @@ footer a{color:rgba(255,255,255,.8)}
       <p class="sub">Install the Sppero app for a driver or a customer, add their number here, and you earn a share of what Sppero makes on their rides — for as long as they keep riding.</p>
       <div class="steps">
         <div class="step"><i>STEP 1</i><b>Join free</b><p>Your name, your number, a password. Nothing else, and no fee — ever.</p></div>
-        <div class="step"><i>STEP 2</i><b>Get people on Sppero</b><p>Share your code, or add the numbers you installed for and we verify them.</p></div>
+        <div class="step"><i>STEP 2</i><b>Get people on Sppero</b><p>Share your code, or add the numbers you installed for and we verify them. They must be new to Sppero — people already riding cannot be added.</p></div>
         <div class="step"><i>STEP 3</i><b>Earn on their rides</b><p>Every completed ride adds to your balance. Watch it here, ride by ride.</p></div>
         <div class="step"><i>STEP 4</i><b>Withdraw from ₹200</b><p>Straight to your UPI or bank account.</p></div>
       </div>
@@ -224,7 +224,12 @@ footer a{color:rgba(255,255,255,.8)}
 
       <div id="w-add" class="card" style="display:none">
         <h2>Add numbers you installed for</h2>
-        <p class="muted" style="margin-bottom:16px">If someone joined without using your code, add their number here and Sppero will check it. They must already have a Sppero account.</p>
+        <p class="muted" style="margin-bottom:12px">If someone joined without using your code, add their number here and Sppero will check it. They must already have a Sppero account.</p>
+        <div style="background:#fff8e6;border:1px solid #f0d089;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13.5px;line-height:1.6;color:#6b4c00">
+          <b>Only people who joined Sppero after you did.</b> If someone was already using
+          Sppero before you became a partner, they cannot be added to your account — you did
+          not bring them, so those numbers will not be approved.
+        </div>
         <div class="msg" id="claimMsg"></div>
         <div class="row2" style="margin-bottom:14px">
           <div><label>Their mobile number</label><input id="cPhone" inputmode="numeric" maxlength="10"></div>
@@ -316,6 +321,8 @@ async function boot(){
       return '<option value="'+esc(q)+'">'+esc(q)+'</option>'; }).join('');
     document.getElementById('termsText').innerHTML =
       'You earn ' + CFG.rate_percent + '% of the commission Sppero earns on rides taken by people you bring, '
+      + 'and only people who join Sppero after you become a partner count — anyone already riding before that '
+      + 'cannot be added to your account. Earnings are shared if two partners are involved in the same ride. '
       + 'for as long as they keep riding. Earnings clear ' + CFG.hold_days + ' days after each ride and can be '
       + 'withdrawn from ₹' + CFG.min_payout + '. You earn only from people you personally bring — never from '
       + 'people they bring. Sppero may change the commission share, the programme and this policy at any time; '
