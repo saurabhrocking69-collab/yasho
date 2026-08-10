@@ -89,6 +89,13 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 footer{background:var(--dark);color:rgba(255,255,255,.6);padding:34px 24px;text-align:center;font-size:13px;line-height:1.9;margin-top:40px}
 footer a{color:rgba(255,255,255,.8)}
 .terms{font-size:11.5px;color:var(--gray);line-height:1.65;margin-top:16px}
+.keepsafe{background:#fff8e6;border:1px solid #f0d089;border-radius:10px;padding:12px 14px;
+  margin-bottom:16px;font-size:13px;line-height:1.6;color:#6b4c00}
+.keepsafe b{display:block;margin-bottom:3px;color:#5a3f00}
+.savebar{background:#1a1a2e;color:#fff;border-radius:14px;padding:18px 20px;margin-bottom:18px;
+  display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.savebar div{flex:1;min-width:220px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.85)}
+.savebar b{display:block;color:#fff;font-size:15px;margin-bottom:4px}
 @media(max-width:640px){.row2{grid-template-columns:1fr}.nav-links li:not(:last-child){display:none}}
 </style>
 </head>
@@ -139,6 +146,15 @@ footer a{color:rgba(255,255,255,.8)}
           <div class="fg"><label>Security question <span style="font-weight:400;color:var(--gray)">— used if you forget your password</span></label>
             <select id="jQ"></select></div>
           <div class="fg"><label>Your answer</label><input id="jA" autocomplete="off"></div>
+          <!-- Stated before they finish typing, not after. With no OTP and no
+               email, these two things ARE the account — losing both means the
+               money in it cannot be reached by anyone, including us. -->
+          <div class="keepsafe">
+            <b>Write these down and keep them safe.</b>
+            Your password and this answer are the only way into your account — there is no
+            OTP and no email reset. Note them somewhere private that only you can see, and
+            never share them with anyone, including someone claiming to be from Sppero.
+          </div>
           <label style="display:flex;gap:9px;align-items:flex-start;font-weight:400;font-size:13px;line-height:1.5;margin-bottom:16px">
             <input type="checkbox" id="jTerms" style="width:auto;margin-top:3px">
             <span>I accept the partner terms below.</span></label>
@@ -186,6 +202,14 @@ footer a{color:rgba(255,255,255,.8)}
 
   <section class="sec">
     <div class="wrap">
+      <div class="savebar" id="saveBar" style="display:none">
+        <div><b>Save your password and security answer now</b>
+          They are the only way back into this account — there is no OTP and no email reset.
+          If you forget both, nobody can recover your earnings for you. Keep them somewhere
+          private, and never share them with anyone claiming to be from Sppero.</div>
+        <button class="btn btn-sm" onclick="dismissSaveBar()">I have saved them</button>
+      </div>
+
       <div class="codebox">
         <div class="k">Your referral code</div>
         <div class="code" id="myCode">—</div>
@@ -346,6 +370,7 @@ async function doJoin(){
       security_a: document.getElementById('jA').value,
       accept_terms: true }});
     TOK = d.token; localStorage.setItem('sp_partner_token', TOK);
+    localStorage.setItem('sp_remind_save', '1');
     openApp();
   } catch(e){ say('joinMsg', e.message); }
   btn.disabled = false;
@@ -380,8 +405,14 @@ async function doReset(){
       security_a: document.getElementById('fA').value,
       password: document.getElementById('fPass').value }});
     TOK = d.token; localStorage.setItem('sp_partner_token', TOK);
+    localStorage.setItem('sp_remind_save', '1');
     openApp();
   } catch(e){ say('fMsg', e.message); }
+}
+
+function dismissSaveBar(){
+  localStorage.removeItem('sp_remind_save');
+  document.getElementById('saveBar').style.display = 'none';
 }
 
 function logout(){
@@ -403,6 +434,11 @@ async function openApp(){
     // STYLESHEET, so clearing the inline style just falls back to it and the
     // button stays hidden — which is exactly what happened.
     document.getElementById('logoutBtn').style.display = 'inline-block';
+    // Shown once, at the only two moments the credentials are fresh in mind:
+    // just after signing up, and just after setting a new password.
+    if (localStorage.getItem('sp_remind_save') === '1') {
+      document.getElementById('saveBar').style.display = 'flex';
+    }
     document.getElementById('hiName').textContent = d.partner.name;
     document.getElementById('myCode').textContent = d.partner.code;
     var b = d.balances;
