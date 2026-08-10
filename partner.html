@@ -27,7 +27,8 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);ba
 .hero-in{max-width:1000px;margin:0 auto;position:relative;z-index:1}
 .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);color:var(--red);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:20px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
-h1{font-size:clamp(32px,5.5vw,54px);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:16px}
+h1{font-size:clamp(32px,5.5vw,54px);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1px;
+  margin-bottom:16px;text-wrap:balance}
 h1 em{font-style:normal;color:var(--red)}
 .sub{color:rgba(255,255,255,.72);font-size:17px;line-height:1.7;max-width:560px}
 
@@ -70,8 +71,10 @@ h2{font-size:26px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
 .feed-ic{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;
   place-items:center;font-size:13px;flex-shrink:0}
 .feed-t{flex:1;min-width:0}
-.feed-n{color:#fff;font-size:13px;font-weight:700;line-height:1.2}
-.feed-s{color:rgba(255,255,255,.45);font-size:11px}
+/* Both must be block. As inline spans they ran together — "RameshAuto · 5.2 km". */
+.feed-n{display:block;color:#fff;font-size:13px;font-weight:700;line-height:1.25}
+.feed-s{display:block;color:rgba(255,255,255,.45);font-size:11px;line-height:1.3;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .feed-a{color:var(--gold);font-weight:800;font-size:13.5px;font-variant-numeric:tabular-nums}
 
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:26px}
@@ -99,6 +102,17 @@ h2{font-size:26px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
 .calc-amt{font-size:42px;font-weight:900;color:var(--gold);letter-spacing:-1.5px;line-height:1.1;margin-top:6px;
   font-variant-numeric:tabular-nums}
 .calc-note{font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.55;margin-top:10px}
+.cmp{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.13);text-align:left}
+.cmp-row{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.cmp-l{font-size:11.5px;color:rgba(255,255,255,.6);width:74px;flex-shrink:0}
+.cmp-bar{flex:1;height:7px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
+.cmp-bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),#fbbf24);
+  transform-origin:left;animation:cmpGrow .8s cubic-bezier(.2,.9,.3,1) both}
+@keyframes cmpGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.cmp-v{font-size:11.5px;color:var(--gold);font-weight:800;width:56px;text-align:right;
+  font-variant-numeric:tabular-nums}
+.cmp-note{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:9px;line-height:1.5}
+@media(prefers-reduced-motion:reduce){.cmp-bar i{animation:none}}
 
 @media(max-width:860px){
   .hero-split{grid-template-columns:1fr;gap:32px}
@@ -213,10 +227,14 @@ footer a{color:rgba(255,255,255,.8)}
         <div class="demo-card">
           <div class="demo-top">
             <span class="demo-k">Your balance</span>
-            <span class="demo-live"><i></i>live</span>
+            <!-- "Example", not "live". A pulsing green dot reads as real
+                 platform activity; this is a preview of one partner's screen,
+                 and saying so costs nothing while implying otherwise would be
+                 the first dishonest thing on the page. -->
+            <span class="demo-live"><i></i>example</span>
           </div>
           <div class="demo-amt">₹<span id="demoAmt">0</span></div>
-          <div class="demo-sub" id="demoSub">from 3 people you brought</div>
+          <div class="demo-sub" id="demoSub">how a balance builds, ride by ride</div>
           <div class="demo-feed" id="demoFeed"></div>
         </div>
       </div>
@@ -252,6 +270,22 @@ footer a{color:rgba(255,255,255,.8)}
           <div class="calc-out">
             <span class="calc-k">Estimated every month</span>
             <div class="calc-amt">₹<span id="calcAmt">0</span></div>
+            <!-- The one comparison that changes what a partner does next.
+                 Bars rather than a sentence, because the ratio is the point
+                 and a 12:1 gap is understood before it is read. -->
+            <div class="cmp">
+              <div class="cmp-row">
+                <span class="cmp-l">1 driver</span>
+                <span class="cmp-bar"><i style="width:100%"></i></span>
+                <span class="cmp-v" id="cmpD">₹0</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-l">1 customer</span>
+                <span class="cmp-bar"><i style="width:8%"></i></span>
+                <span class="cmp-v" id="cmpC">₹0</span>
+              </div>
+              <p class="cmp-note">One driver is worth about twelve customers. Bring drivers.</p>
+            </div>
             <p class="calc-note" id="calcNote"></p>
           </div>
         </div>
@@ -776,6 +810,11 @@ function initDemo(){
   var total = 0, i = 0;
 
   function addRide(){
+    // Loops back to the start of a month rather than climbing for ever. Left
+    // open on a desk, an unbounded counter reaches numbers no partner with
+    // three people would ever see, which turns an honest preview into a
+    // tall story.
+    if (total > 2600) { total = 0; feed.innerHTML = ''; }
     var r = RIDES[i % RIDES.length]; i++;
     var earn = shareOf(r[2]);
     total += earn;
@@ -823,6 +862,10 @@ function calcEarn(){
   var per = shareOf(AVG_FARE);
   var monthly = d * DRIVER_RIDES * per + c * CUSTOMER_RIDES * per;
   countTo(document.getElementById('calcAmt'), monthly);
+  // The per-person comparison, from the same arithmetic — so the bars can
+  // never drift from the total above them.
+  document.getElementById('cmpD').textContent = '₹' + Math.round(DRIVER_RIDES * per);
+  document.getElementById('cmpC').textContent = '₹' + Math.round(CUSTOMER_RIDES * per);
   document.getElementById('calcNote').textContent =
     'Assuming a driver completes about ' + DRIVER_RIDES + ' rides a month and a customer takes about '
     + CUSTOMER_RIDES + ', on an average ₹' + AVG_FARE + ' fare. You earn ' + (CFG.rate_percent || 60)
