@@ -29,7 +29,13 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(26,26,46,.96);ba
 /* HERO */
 .hero{min-height:100vh;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 45%,#0f3460 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(233,69,96,.18) 0%,transparent 65%)}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#fff,transparent)}
+/* Hand-off to the white section below. Was 80px of a straight linear fade,
+   which landed as a bank of fog across the bottom third of the phone and now
+   also sat on top of the floor grid. Shorter, and eased so almost all of the
+   whitening happens in the last few pixels — the seam disappears without the
+   hero going pale. */
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:56px;z-index:2;
+  background:linear-gradient(to top,#fff 0%,rgba(255,255,255,.86) 22%,rgba(255,255,255,.42) 52%,transparent 100%)}
 .hero-inner{max-width:1200px;margin:0 auto;padding:80px 24px 120px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);color:var(--red);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:22px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite}
@@ -249,6 +255,115 @@ footer{background:#0a0a1a;padding:60px 0 32px}
 @keyframes careParticle{0%{transform:translateY(100%) rotate(0deg);opacity:0}10%{opacity:.18}90%{opacity:.12}100%{transform:translateY(-120%) rotate(360deg);opacity:0}}
 @keyframes careShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @keyframes careBounce{0%{transform:scale(0) rotate(-15deg)}60%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0deg)}}
+/* ══ HERO — depth, life, choreography ═══════════════════════════════════
+   Everything here animates transform/opacity/translate only, so it stays on
+   the compositor and never triggers layout. The whole block is switched off
+   in one place by the prefers-reduced-motion rule at the bottom of it. */
+
+/* Ambient light. Two oversized glows drifting on deliberately un-matched
+   periods (22s and 28s) so they never resync into a visible loop, over a
+   grid tipped into perspective — a city read edge-on, rather than the flat
+   graph paper the hero had. */
+.hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.hero-glow{position:absolute;border-radius:50%;filter:blur(90px)}
+.hero-glow.g1{width:620px;height:620px;background:radial-gradient(circle,rgba(233,69,96,.5),transparent 70%);top:-200px;right:-140px;animation:heroDrift1 22s ease-in-out infinite;translate:calc(var(--mx,0)*-26px) calc(var(--my,0)*-26px)}
+.hero-glow.g2{width:540px;height:540px;background:radial-gradient(circle,rgba(56,189,248,.24),transparent 70%);bottom:-180px;left:-120px;animation:heroDrift2 28s ease-in-out infinite;translate:calc(var(--mx,0)*18px) calc(var(--my,0)*18px)}
+.hero-floor{position:absolute;left:-30%;right:-30%;bottom:0;height:44%;
+  background-image:linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px);
+  background-size:58px 58px;
+  transform:perspective(320px) rotateX(67deg);transform-origin:bottom center;
+  -webkit-mask-image:linear-gradient(to top,#000,transparent 76%);mask-image:linear-gradient(to top,#000,transparent 76%);
+  animation:heroFloor 8s linear infinite}
+@keyframes heroDrift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,55px) scale(1.12)}}
+@keyframes heroDrift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(65px,-45px) scale(1.1)}}
+@keyframes heroFloor{to{background-position:0 58px}}
+
+/* Entrance. The hero used to arrive all at once; now it assembles top-down,
+   which is what makes a page feel authored rather than merely loaded.
+   `backwards` matters — without it each element flashes at its final position
+   for one frame before its delay elapses. */
+.hero-left>*{animation:heroIn .85s cubic-bezier(.2,.7,.3,1) backwards}
+.hero-left>*:nth-child(1){animation-delay:.06s}
+.hero-left>*:nth-child(2){animation-delay:.16s}
+.hero-left>*:nth-child(3){animation-delay:.28s}
+.hero-left>*:nth-child(4){animation-delay:.38s}
+.hero-left>*:nth-child(5){animation-delay:.48s}
+.hero-visual{animation:heroInVisual 1.1s .3s cubic-bezier(.2,.7,.3,1) backwards}
+@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroInVisual{from{opacity:0;transform:translateY(34px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* The badge dot now actually pulses like a live indicator instead of sitting
+   there as a dot. */
+.hero-badge .dot{position:relative}
+.hero-badge .dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--red);animation:badgeRing 2s ease-out infinite}
+@keyframes badgeRing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+
+/* Depth through DIFFERENCE. The phone and both badges previously shared one
+   `float` keyframe, so all three rose and fell together — three objects moving
+   as one plate, which is the opposite of depth. Now each has its own period,
+   amplitude and a little rotation, and the nearer a thing is meant to be, the
+   further the parallax moves it. `translate` is used for parallax rather than
+   `transform` precisely so it composes with the float animation instead of
+   fighting it for the same property. */
+.phone{animation:phoneFloat 7s ease-in-out infinite;translate:calc(var(--mx,0)*12px) calc(var(--my,0)*12px);transition:translate .35s cubic-bezier(.2,.7,.3,1)}
+.fbadge-1{animation:badgeFloatA 5.4s ease-in-out infinite;translate:calc(var(--mx,0)*30px) calc(var(--my,0)*30px);transition:translate .35s cubic-bezier(.2,.7,.3,1)}
+.fbadge-2{animation:badgeFloatB 6.3s .7s ease-in-out infinite;translate:calc(var(--mx,0)*38px) calc(var(--my,0)*38px);transition:translate .35s cubic-bezier(.2,.7,.3,1)}
+@keyframes phoneFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-13px) rotate(-.5deg)}}
+@keyframes badgeFloatA{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-17px) rotate(1.5deg)}}
+@keyframes badgeFloatB{0%,100%{transform:translateY(0) rotate(1.5deg)}50%{transform:translateY(-21px) rotate(-1deg)}}
+
+/* Glass rim on the phone, so it reads as a lit object rather than a filled
+   rounded rectangle. */
+.phone::after{content:'';position:absolute;inset:0;border-radius:35px;pointer-events:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.16),transparent 34%,transparent 68%,rgba(255,255,255,.07));
+  z-index:3}
+
+/* ── The map. Was a flat rectangle with a 20px grid, one dashed arc, and a
+   bus emoji sliding 20px sideways on a path it was not on. It is the visual
+   centrepiece of the whole page and it convinced nobody, so it is now a real
+   little street network with a route that draws itself and a vehicle that
+   actually follows that exact route. ── */
+.ps-map{background:linear-gradient(150deg,#132b33,#101c2e 60%,#141a2c)}
+.ps-svg{position:absolute;inset:0;width:100%;height:100%}
+.ps-blk{fill:rgba(255,255,255,.028)}
+.ps-park{fill:rgba(34,197,94,.16)}
+.ps-water{fill:none;stroke:rgba(56,189,248,.22);stroke-width:9;stroke-linecap:round}
+.ps-road{stroke:rgba(255,255,255,.09);stroke-linecap:round;fill:none}
+.ps-road.major{stroke:rgba(255,255,255,.15);stroke-width:5}
+.ps-road.minor{stroke-width:2.5}
+/* The route draws itself, pauses fully drawn, then resets — the pause is the
+   part that reads as "your trip", so it is most of the cycle. */
+.ps-line{fill:none;stroke:var(--red);stroke-width:3.5;stroke-linecap:round;
+  filter:drop-shadow(0 0 5px rgba(233,69,96,.75));
+  stroke-dasharray:320;stroke-dashoffset:320;animation:routeDraw 6s ease-in-out infinite}
+@keyframes routeDraw{0%{stroke-dashoffset:320}35%{stroke-dashoffset:0}85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+/* Pickup pin with a radar ring, so the map has a heartbeat. */
+.ps-ping{fill:none;stroke:var(--red);stroke-width:2;transform-origin:100px 228px;animation:pingOut 2.4s ease-out infinite}
+@keyframes pingOut{0%{transform:scale(.35);opacity:.95}100%{transform:scale(2.6);opacity:0}}
+.ps-dot-a{fill:var(--red)}
+.ps-dot-b{fill:#fff}
+/* The vehicle rides the SAME path the route is drawn from, in SVG user units,
+   so it can never drift off the line the way a hand-tuned translate did. */
+.ps-veh{offset-path:path("M100 228 L100 186 Q100 176 90 176 L66 176 Q56 176 56 166 L56 98 Q56 88 66 88 L90 88 Q100 88 100 78 L100 32");offset-rotate:auto;animation:vehRun 6s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes vehRun{0%{offset-distance:0%;opacity:0}6%{opacity:1}35%{offset-distance:100%}42%{offset-distance:100%;opacity:1}52%{offset-distance:100%;opacity:0}100%{offset-distance:0%;opacity:0}}
+/* Older Safari has no motion path — rather than park the vehicle at 0,0 in the
+   corner, drop it and let the drawing route carry the scene on its own. */
+@supports not (offset-path: path("M0 0 L1 1")){.ps-veh{display:none}}
+.ps-card{transition:transform .3s ease,background .3s ease}
+.phone:hover .ps-card{transform:translateX(2px)}
+
+/* One switch for everything above. This page had no reduced-motion handling at
+   all, and it is now considerably busier than it was — someone who has asked
+   their system to stop moving things should get a still, complete hero, not a
+   broken one. Layout and colour are untouched; only motion stops. */
+@media (prefers-reduced-motion: reduce){
+  .hero-glow,.hero-floor,.phone,.fbadge-1,.fbadge-2,.hero-left>*,.hero-visual,
+  .ps-line,.ps-ping,.ps-veh,.hero-badge .dot::after,.ps-pin-b{animation:none!important}
+  .phone,.fbadge-1,.fbadge-2,.hero-glow{translate:none!important;transition:none!important}
+  .ps-line{stroke-dashoffset:0}
+  .ps-veh{offset-distance:62%}
+}
+
 .anim{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .anim.in{opacity:1;transform:translateY(0)}
 /* MOBILE */
@@ -303,6 +418,11 @@ footer{background:#0a0a1a;padding:60px 0 32px}
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-glow g1"></div>
+    <div class="hero-glow g2"></div>
+    <div class="hero-floor"></div>
+  </div>
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-badge"><span class="dot"></span> Now available across India</div>
@@ -319,9 +439,9 @@ footer{background:#0a0a1a;padding:60px 0 32px}
         </a>
       </div>
       <div class="hero-stats">
-        <div><div class="stat-val">50K+</div><div class="stat-label">Happy Riders</div></div>
-        <div><div class="stat-val">5K+</div><div class="stat-label">Sppero Buddies</div></div>
-        <div><div class="stat-val">4.8&#9733;</div><div class="stat-label">Avg Rating</div></div>
+        <div><div class="stat-val" data-to="50" data-suffix="K+">50K+</div><div class="stat-label">Happy Riders</div></div>
+        <div><div class="stat-val" data-to="5" data-suffix="K+">5K+</div><div class="stat-label">Sppero Buddies</div></div>
+        <div><div class="stat-val" data-to="4.8" data-dec="1" data-suffix="&#9733;">4.8&#9733;</div><div class="stat-label">Avg Rating</div></div>
       </div>
     </div>
     <div class="hero-visual">
@@ -334,11 +454,49 @@ footer{background:#0a0a1a;padding:60px 0 32px}
         <div class="phone-notch"></div>
         <div class="phone-screen">
           <div class="ps-map">
-            <div class="ps-map-grid"></div>
-            <div class="ps-route"></div>
-            <div class="ps-pin-a">&#128205;</div>
-            <div class="ps-pin-b">&#127937;</div>
-            <div class="ps-car">&#128650;</div>
+            <svg class="ps-svg" viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <!-- City blocks and landmarks first, so every road and the route
+                   sit on top of them rather than being interrupted by them. -->
+              <rect class="ps-blk" x="8"   y="16"  width="66" height="52" rx="4"/>
+              <rect class="ps-blk" x="126" y="16"  width="66" height="52" rx="4"/>
+              <rect class="ps-blk" x="8"   y="104" width="42" height="60" rx="4"/>
+              <rect class="ps-blk" x="126" y="104" width="66" height="60" rx="4"/>
+              <rect class="ps-blk" x="8"   y="196" width="66" height="46" rx="4"/>
+              <rect class="ps-blk" x="126" y="196" width="66" height="46" rx="4"/>
+              <rect class="ps-park" x="64" y="104" width="46" height="46" rx="6"/>
+              <path class="ps-water" d="M-10 182 C 40 176 60 194 104 188 C 150 182 176 196 210 190"/>
+              <!-- Streets: a few wide ones carrying the eye, thin ones filling
+                   between. Uniform spacing was what made the old grid read as
+                   graph paper instead of a city. -->
+              <path class="ps-road major" d="M100 -6 L100 256"/>
+              <path class="ps-road major" d="M-6 88 L206 88"/>
+              <path class="ps-road major" d="M-6 176 L206 176"/>
+              <path class="ps-road minor" d="M56 -6 L56 256"/>
+              <path class="ps-road minor" d="M150 -6 L150 256"/>
+              <path class="ps-road minor" d="M-6 42 L206 42"/>
+              <path class="ps-road minor" d="M-6 130 L206 130"/>
+              <path class="ps-road minor" d="M-6 220 L206 220"/>
+              <!-- The trip. It turns at junctions and runs ALONG the streets
+                   drawn above — up the main road, left at the crossing, up the
+                   side street, right, and up to the flag. The first version was
+                   a free S-curve that cut straight across a park, which is
+                   exactly what a real route never does.
+                   pathLength="300" normalises the length for the draw animation,
+                   so the dash figures below stay correct even if this geometry
+                   is edited later. The vehicle's motion path in the CSS is this
+                   same `d`, so the two cannot drift apart. -->
+              <path class="ps-line" pathLength="300" d="M100 228 L100 186 Q100 176 90 176 L66 176 Q56 176 56 166 L56 98 Q56 88 66 88 L90 88 Q100 88 100 78 L100 32"/>
+              <circle class="ps-ping" cx="100" cy="228" r="7"/>
+              <circle class="ps-dot-a" cx="100" cy="228" r="5.5"/>
+              <circle class="ps-dot-b" cx="100" cy="228" r="2"/>
+              <g class="ps-veh">
+                <circle cx="0" cy="0" r="7.5" fill="#fff"/>
+                <circle cx="0" cy="0" r="6" fill="var(--red)"/>
+                <path d="M-2.6 0 L1.8 0 M0 -2.2 L2.4 0 L0 2.2" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <rect class="ps-dot-b" x="96" y="24" width="3" height="12" rx="1.5"/>
+              <path class="ps-dot-a" d="M99 24 L110 27.5 L99 31 Z"/>
+            </svg>
           </div>
           <div class="ps-card">
             <div class="ps-card-icon">&#128650;</div>
@@ -799,6 +957,63 @@ const obs=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in')}});
 },{threshold:0.1});
 document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+
+/* ══ HERO motion ═══════════════════════════════════════════════════════
+   One switch for the whole page, read once. The CSS honours reduced motion
+   on its own; this makes the JS agree with it instead of quietly re-adding
+   movement the stylesheet just took away. */
+const HERO_STILL = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Pointer parallax. The hero writes --mx/--my (both -1..1) and the stylesheet
+   decides how far each layer moves — badges furthest, phone least, glows
+   against the cursor. Kept to one rAF frame per pointer burst, because
+   mousemove fires far faster than the screen can redraw and doing the work
+   per event is how a "premium" hero ends up feeling sticky. */
+(function heroParallax(){
+  const hero = document.querySelector('.hero');
+  if (!hero || HERO_STILL) return;
+  // Fine pointers only. On a touchscreen there is no hover to track, and
+  // pointermove there arrives mid-scroll, which would jerk the whole scene.
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  let queued = false, nx = 0, ny = 0;
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect();
+    nx = (e.clientX - r.left) / r.width  * 2 - 1;
+    ny = (e.clientY - r.top)  / r.height * 2 - 1;
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { hero.style.setProperty('--mx', nx.toFixed(3)); hero.style.setProperty('--my', ny.toFixed(3)); queued = false; });
+  });
+  // Leaving must settle back to centre, or the scene stays permanently tilted
+  // toward wherever the cursor happened to exit.
+  hero.addEventListener('pointerleave', () => { hero.style.setProperty('--mx', '0'); hero.style.setProperty('--my', '0'); });
+})();
+
+/* Stat count-up. Runs on load rather than on scroll — the hero is already in
+   view, so an IntersectionObserver here would fire instantly anyway and only
+   add a way for the numbers to be missed. */
+(function heroStats(){
+  const els = document.querySelectorAll('.hero-stats .stat-val[data-to]');
+  if (!els.length) return;
+  if (HERO_STILL) return;                       // final values are already in the HTML
+  els.forEach(el => {
+    const to  = parseFloat(el.dataset.to);
+    const dec = parseInt(el.dataset.dec || '0', 10);
+    const suf = el.dataset.suffix || '';
+    const dur = 1400, start = performance.now() + 350;
+    el.textContent = (0).toFixed(dec) + suf;
+    const tick = now => {
+      const t = Math.min(1, Math.max(0, (now - start) / dur));
+      // Ease-out cubic: fast first, settling at the end — a linear counter
+      // reads like a loading bar rather than an arrival.
+      const v = to * (1 - Math.pow(1 - t, 3));
+      el.textContent = v.toFixed(dec) + suf;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = to.toFixed(dec) + suf;
+    };
+    requestAnimationFrame(tick);
+  });
+})();
 
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar').style.background=
