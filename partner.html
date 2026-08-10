@@ -89,9 +89,16 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 footer{background:var(--dark);color:rgba(255,255,255,.6);padding:34px 24px;text-align:center;font-size:13px;line-height:1.9;margin-top:40px}
 footer a{color:rgba(255,255,255,.8)}
 .terms{font-size:11.5px;color:var(--gray);line-height:1.65;margin-top:16px}
-.keepsafe{background:#fff8e6;border:1px solid #f0d089;border-radius:10px;padding:12px 14px;
-  margin-bottom:16px;font-size:13px;line-height:1.6;color:#6b4c00}
-.keepsafe b{display:block;margin-bottom:3px;color:#5a3f00}
+.ks{display:flex;align-items:center;gap:9px;background:#fff8e6;border:1px solid #f0d089;
+  border-radius:10px;padding:10px 13px;margin-bottom:16px;color:#6b4c00;font-size:13px;
+  min-height:42px;overflow:hidden}
+.ks-ic{font-size:15px;line-height:1;flex-shrink:0}
+.ks-tx{font-weight:600;line-height:1.45}
+/* Icon and text move together, so the icon is never left beside the wrong line. */
+.ks-ic,.ks-tx{transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1)}
+.ks.out .ks-ic,.ks.out .ks-tx{opacity:0;transform:translateY(-7px)}
+.ks.in  .ks-ic,.ks.in  .ks-tx{opacity:0;transform:translateY(7px);transition:none}
+@media(prefers-reduced-motion:reduce){.ks-ic,.ks-tx{transition:none}}
 .savebar{background:#1a1a2e;color:#fff;border-radius:14px;padding:18px 20px;margin-bottom:18px;
   display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
 .savebar div{flex:1;min-width:220px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.85)}
@@ -146,14 +153,12 @@ footer a{color:rgba(255,255,255,.8)}
           <div class="fg"><label>Security question <span style="font-weight:400;color:var(--gray)">— used if you forget your password</span></label>
             <select id="jQ"></select></div>
           <div class="fg"><label>Your answer</label><input id="jA" autocomplete="off"></div>
-          <!-- Stated before they finish typing, not after. With no OTP and no
-               email, these two things ARE the account — losing both means the
-               money in it cannot be reached by anyone, including us. -->
-          <div class="keepsafe">
-            <b>Write these down and keep them safe.</b>
-            Your password and this answer are the only way into your account — there is no
-            OTP and no email reset. Note them somewhere private that only you can see, and
-            never share them with anyone, including someone claiming to be from Sppero.
+          <!-- One line at a time rather than a wall of warning. Three points
+               that all matter but would be skipped as a paragraph; rotating
+               them keeps the form light and still gets all three read. -->
+          <div class="ks" id="ksBar" aria-live="polite">
+            <span class="ks-ic" id="ksIc">🔒</span>
+            <span class="ks-tx" id="ksTx">Save your password and answer somewhere private</span>
           </div>
           <label style="display:flex;gap:9px;align-items:flex-start;font-weight:400;font-size:13px;line-height:1.5;margin-bottom:16px">
             <input type="checkbox" id="jTerms" style="width:auto;margin-top:3px">
@@ -588,7 +593,40 @@ async function requestWithdraw(){
   }
 })();
 
+/* Security reminders, one line at a time.
+   Three points that all matter but would be skipped as a paragraph. Taking
+   turns keeps the form light and gets all three read. Pauses while the pointer
+   is over it, and reduced-motion sees only the first — which is the one that
+   matters most, so nothing is lost by holding still. */
+var KS = [
+  ['🔒', 'Save your password and answer somewhere private'],
+  ['🚫', 'Never share them — not even with Sppero staff'],
+  ['⚠️', 'No OTP, no email reset — these are the only way in'],
+];
+function initKeepSafe(){
+  var bar = document.getElementById('ksBar');
+  if (!bar) return;
+  var ic = document.getElementById('ksIc'), tx = document.getElementById('ksTx');
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var i = 0, timer = null;
+  function step(){
+    i = (i + 1) % KS.length;
+    bar.classList.add('out');
+    setTimeout(function(){
+      ic.textContent = KS[i][0]; tx.textContent = KS[i][1];
+      bar.classList.remove('out'); bar.classList.add('in');
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.classList.remove('in'); }); });
+    }, 300);
+  }
+  function start(){ stop(); timer = setInterval(step, 3600); }
+  function stop(){ if (timer) clearInterval(timer); timer = null; }
+  start();
+  bar.addEventListener('mouseenter', stop);
+  bar.addEventListener('mouseleave', start);
+}
+
 boot();
+initKeepSafe();
 </script>
 </body>
 </html>
