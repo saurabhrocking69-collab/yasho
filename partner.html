@@ -37,11 +37,77 @@ h1 em{font-style:normal;color:var(--red)}
 h2{font-size:26px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
 .muted{color:var(--gray);font-size:14px;line-height:1.6}
 
+/* Money is gold here, not red. Red is the brand's action colour — using it for
+   earnings too made every number look like a button, and gold against this
+   navy is what reward is supposed to feel like. */
+.hero{isolation:isolate}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none}
+.g1{width:520px;height:520px;background:rgba(233,69,96,.34);top:-160px;right:-120px;animation:drift1 22s ease-in-out infinite}
+.g2{width:440px;height:440px;background:rgba(245,158,11,.18);bottom:-180px;left:-100px;animation:drift2 27s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,60px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,-50px)}}
+
+.hero-split{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn-line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-line:hover{border-color:#fff;box-shadow:none}
+
+.demo-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:20px;
+  padding:22px;backdrop-filter:blur(10px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.demo-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.demo-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700}
+.demo-live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#6ee7a8;font-weight:700}
+.demo-live i{width:6px;height:6px;border-radius:50%;background:#6ee7a8;animation:blip 1.6s infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+.demo-amt{font-size:44px;font-weight:900;color:var(--gold);letter-spacing:-1.5px;line-height:1;
+  font-variant-numeric:tabular-nums}
+.demo-sub{font-size:12.5px;color:rgba(255,255,255,.5);margin:6px 0 16px}
+.demo-feed{display:flex;flex-direction:column;gap:8px;min-height:150px}
+.feed-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:9px 12px;
+  animation:feedIn .45s cubic-bezier(.2,.9,.3,1) both}
+@keyframes feedIn{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
+.feed-ic{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;
+  place-items:center;font-size:13px;flex-shrink:0}
+.feed-t{flex:1;min-width:0}
+.feed-n{color:#fff;font-size:13px;font-weight:700;line-height:1.2}
+.feed-s{color:rgba(255,255,255,.45);font-size:11px}
+.feed-a{color:var(--gold);font-weight:800;font-size:13.5px;font-variant-numeric:tabular-nums}
+
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:26px}
-.step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px}
+.step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px;
+  transition:transform .28s cubic-bezier(.2,.9,.3,1),border-color .28s,background .28s}
+.step:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.45);background:rgba(255,255,255,.09)}
 .step b{display:block;color:#fff;font-size:15px;margin-bottom:5px}
 .step p{color:rgba(255,255,255,.65);font-size:13.5px;line-height:1.55}
-.step i{font-style:normal;color:var(--red);font-weight:800;font-size:12px;letter-spacing:.1em}
+.step i{font-style:normal;color:var(--gold);font-weight:800;font-size:12px;letter-spacing:.1em;
+  display:block;margin-bottom:7px}
+
+.calc-sec{background:linear-gradient(180deg,#141428,#1a1a2e)}
+.calc{max-width:900px;margin:0 auto}
+.calc-head{text-align:center;margin-bottom:26px}
+.calc-head h2{color:#fff}
+.calc-head .muted{color:rgba(255,255,255,.55);max-width:520px;margin:6px auto 0}
+.calc-body{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:26px}
+.calc-controls label{color:rgba(255,255,255,.75);font-size:13.5px;display:flex;justify-content:space-between;align-items:baseline}
+.calc-controls label b{color:var(--gold);font-size:17px;font-variant-numeric:tabular-nums}
+.calc-controls input[type=range]{width:100%;margin-top:7px;accent-color:var(--gold);padding:0;border:0;background:none}
+.calc-out{text-align:center;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);
+  border-radius:16px;padding:22px}
+.calc-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700}
+.calc-amt{font-size:42px;font-weight:900;color:var(--gold);letter-spacing:-1.5px;line-height:1.1;margin-top:6px;
+  font-variant-numeric:tabular-nums}
+.calc-note{font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.55;margin-top:10px}
+
+@media(max-width:860px){
+  .hero-split{grid-template-columns:1fr;gap:32px}
+  .calc-body{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .glow{animation:none}.demo-live i{animation:none}
+  .feed-row{animation:none}.step{transition:none}.step:hover{transform:none}
+}
 
 label{display:block;font-size:13px;font-weight:600;margin-bottom:5px;color:var(--dark)}
 input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font:inherit;font-size:15px;background:#fff;color:var(--dark)}
@@ -122,15 +188,73 @@ footer a{color:rgba(255,255,255,.8)}
 <!-- ══ PUBLIC: the pitch ══ -->
 <div id="pitch">
   <section class="hero">
-    <div class="hero-in">
-      <span class="badge"><span class="dot"></span> Partner Programme</span>
-      <h1>Bring people to Sppero.<br><em>Earn from every ride they take.</em></h1>
-      <p class="sub">Install the Sppero app for a driver or a customer, add their number here, and you earn a share of what Sppero makes on their rides — for as long as they keep riding.</p>
+    <!-- Slow-drifting light behind the content. Two blobs at different speeds
+         so the ground never looks like a flat block of navy. -->
+    <span class="glow g1" aria-hidden="true"></span>
+    <span class="glow g2" aria-hidden="true"></span>
+
+    <div class="hero-in hero-split">
+      <div class="hero-copy">
+        <span class="badge"><span class="dot"></span> Partner Programme</span>
+        <h1>Bring people to Sppero.<br><em>Earn from every ride they take.</em></h1>
+        <p class="sub">Install the Sppero app for a driver or a customer, add their number here, and you earn a share of what Sppero makes on their rides — for as long as they keep riding.</p>
+        <div class="hero-cta">
+          <button class="btn" onclick="jumpToForm('join')">Start earning — it's free</button>
+          <button class="btn btn-line" onclick="jumpToForm('login')">I already have an account</button>
+        </div>
+      </div>
+
+      <!-- A working preview of the earnings screen rather than a stock
+           illustration. It shows the actual thing being offered — rides
+           landing one by one and a balance climbing — which is the part worth
+           being motivated by, and it cannot overpromise because the numbers
+           are the real per-ride share. -->
+      <div class="hero-demo" aria-hidden="true">
+        <div class="demo-card">
+          <div class="demo-top">
+            <span class="demo-k">Your balance</span>
+            <span class="demo-live"><i></i>live</span>
+          </div>
+          <div class="demo-amt">₹<span id="demoAmt">0</span></div>
+          <div class="demo-sub" id="demoSub">from 3 people you brought</div>
+          <div class="demo-feed" id="demoFeed"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-in" style="margin-top:44px">
       <div class="steps">
-        <div class="step"><i>STEP 1</i><b>Join free</b><p>Your name, your number, a password. Nothing else, and no fee — ever.</p></div>
-        <div class="step"><i>STEP 2</i><b>Get people on Sppero</b><p>Share your code, or add the numbers you installed for and we verify them. They must be new to Sppero — people already riding cannot be added.</p></div>
-        <div class="step"><i>STEP 3</i><b>Earn on their rides</b><p>Every completed ride adds to your balance. Watch it here, ride by ride.</p></div>
+        <div class="step"><i>STEP 1</i><b>Join free</b><p>Your name, your number, a password. No fee — ever.</p></div>
+        <div class="step"><i>STEP 2</i><b>Get people on Sppero</b><p>Share your code, or add the numbers you installed for. They must be new to Sppero.</p></div>
+        <div class="step"><i>STEP 3</i><b>Earn on their rides</b><p>Every completed ride adds to your balance. Watch it ride by ride.</p></div>
         <div class="step"><i>STEP 4</i><b>Withdraw from ₹200</b><p>Straight to your UPI or bank account.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What one driver is actually worth, with the assumption stated. A promise
+       nobody can check is worth nothing; a sum somebody can check is worth a
+       great deal. -->
+  <section class="sec calc-sec">
+    <div class="wrap">
+      <div class="calc">
+        <div class="calc-head">
+          <h2>What could you earn?</h2>
+          <p class="muted">Drag to see. A driver takes far more rides than a customer, so drivers are where the money is.</p>
+        </div>
+        <div class="calc-body">
+          <div class="calc-controls">
+            <label for="cDrivers">Drivers you bring <b id="cDriversV">3</b></label>
+            <input type="range" id="cDrivers" min="0" max="20" value="3" oninput="calcEarn()">
+            <label for="cCust" style="margin-top:16px">Customers you bring <b id="cCustV">10</b></label>
+            <input type="range" id="cCust" min="0" max="100" value="10" oninput="calcEarn()">
+          </div>
+          <div class="calc-out">
+            <span class="calc-k">Estimated every month</span>
+            <div class="calc-amt">₹<span id="calcAmt">0</span></div>
+            <p class="calc-note" id="calcNote"></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -625,7 +749,88 @@ function initKeepSafe(){
   bar.addEventListener('mouseleave', start);
 }
 
-boot();
+/* ══ HERO DEMO + ESTIMATOR ═════════════════════════════════════════════════
+   Both run on the same real arithmetic the server uses: a ride's fare, 15%
+   commission, and the partner's configured share of that. Nothing here is a
+   round number chosen because it looked good — an estimate somebody can check
+   against their first payout is worth far more than a big one they cannot. */
+var RIDES = [
+  ['Ramesh', 'Auto · 5.2 km',  76, '🛺'],
+  ['Priya',  'Bike · 3.1 km',  51, '🏍️'],
+  ['Imran',  'Car · 8.4 km',  102, '🚗'],
+  ['Sunita', 'Auto · 4.0 km',  76, '🛺'],
+  ['Vikas',  'Bike · 2.6 km',  51, '🏍️'],
+];
+var COMMISSION = 0.15;              // Sppero's cut of a standard ride
+function shareOf(fare){ return fare * COMMISSION * ((CFG.rate_percent || 60) / 100); }
+
+function jumpToForm(which){
+  showForm(which, document.getElementById(which === 'join' ? 't-join' : 't-login'));
+  document.getElementById('f-' + which).scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function initDemo(){
+  var feed = document.getElementById('demoFeed'), amtEl = document.getElementById('demoAmt');
+  if (!feed || !amtEl) return;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var total = 0, i = 0;
+
+  function addRide(){
+    var r = RIDES[i % RIDES.length]; i++;
+    var earn = shareOf(r[2]);
+    total += earn;
+    var row = document.createElement('div');
+    row.className = 'feed-row';
+    row.innerHTML = '<span class="feed-ic">' + r[3] + '</span>'
+      + '<span class="feed-t"><span class="feed-n">' + r[0] + '</span>'
+      + '<span class="feed-s">' + r[1] + ' · ₹' + r[2] + ' fare</span></span>'
+      + '<span class="feed-a">+₹' + earn.toFixed(2) + '</span>';
+    feed.insertBefore(row, feed.firstChild);
+    // Three at a time: enough to read as a stream, few enough that the card
+    // never grows and pushes the page around.
+    while (feed.children.length > 3) feed.removeChild(feed.lastChild);
+    countTo(amtEl, total);
+  }
+
+  // Seed it so the card is never empty on arrival.
+  addRide(); addRide();
+  if (!reduced) setInterval(addRide, 3200);
+}
+
+// Counts to a value rather than snapping — the movement is the point.
+function countTo(el, to){
+  var from = parseFloat(String(el.textContent).replace(/,/g, '')) || 0;
+  var t0 = null, dur = 700;
+  function frame(ts){
+    if (!t0) t0 = ts;
+    var k = Math.min(1, (ts - t0) / dur);
+    var v = from + (to - from) * (1 - Math.pow(1 - k, 3));
+    el.textContent = v.toFixed(2);
+    if (k < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* Assumptions are shown, not buried. A driver completes far more rides than a
+   customer takes, which is the single most useful thing a would-be partner can
+   understand before choosing who to bring. */
+var DRIVER_RIDES = 100, CUSTOMER_RIDES = 8, AVG_FARE = 76;
+function calcEarn(){
+  var d = +document.getElementById('cDrivers').value;
+  var c = +document.getElementById('cCust').value;
+  document.getElementById('cDriversV').textContent = d;
+  document.getElementById('cCustV').textContent = c;
+  var per = shareOf(AVG_FARE);
+  var monthly = d * DRIVER_RIDES * per + c * CUSTOMER_RIDES * per;
+  countTo(document.getElementById('calcAmt'), monthly);
+  document.getElementById('calcNote').textContent =
+    'Assuming a driver completes about ' + DRIVER_RIDES + ' rides a month and a customer takes about '
+    + CUSTOMER_RIDES + ', on an average ₹' + AVG_FARE + ' fare. You earn ' + (CFG.rate_percent || 60)
+    + '% of Sppero’s ' + (COMMISSION * 100) + '% commission — about ₹' + per.toFixed(2)
+    + ' per ride. Real earnings follow the rides actually taken.';
+}
+
+boot().then(function(){ initDemo(); calcEarn(); });
 initKeepSafe();
 </script>
 </body>
