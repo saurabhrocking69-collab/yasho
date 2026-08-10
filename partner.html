@@ -399,7 +399,10 @@ async function openApp(){
     ME = d;
     document.getElementById('pitch').style.display = 'none';
     document.getElementById('app').style.display = '';
-    document.getElementById('logoutBtn').style.display = '';
+    // An explicit value, not ''. The button's display:none lives in the
+    // STYLESHEET, so clearing the inline style just falls back to it and the
+    // button stays hidden — which is exactly what happened.
+    document.getElementById('logoutBtn').style.display = 'inline-block';
     document.getElementById('hiName').textContent = d.partner.name;
     document.getElementById('myCode').textContent = d.partner.code;
     var b = d.balances;
