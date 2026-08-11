@@ -292,6 +292,31 @@ footer{background:#0a0a1a;padding:60px 0 32px}
 @keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes heroInVisual{from{opacity:0;transform:translateY(34px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 
+/* ── Rotating hero message ─────────────────────────────────────────────────
+   The hero used to make one claim forever. It now cycles the badge, headline
+   and sub-line together through three, so the page introduces the ride
+   platform, the partner programme and the driver app rather than only the
+   first of them. They swap as one unit — a headline about earning under a
+   sub-line about booking a ride would read as a mistake. */
+.hero-msg{transition:opacity .34s ease,transform .34s ease}
+.hero-msg.out{opacity:0;transform:translateY(10px)}
+/* The headline holds the height of its tallest message, so the buttons and
+   stats below do not jump every time the text changes length. */
+#heroH1{min-height:calc(3 * 1.08em)}
+/* Same for the sub-line: the three messages run to two or three lines, so
+   without this the buttons and stats below shuffle up and down on every
+   rotation. Reserving the tallest keeps the whole left column still. */
+#heroSub{min-height:calc(3 * 1.7em)}
+
+.btn-partner{display:flex;align-items:center;gap:12px;padding:12px 22px;border-radius:14px;font-weight:700;
+  background:rgba(233,69,96,.16);color:#fff;border:2px solid rgba(233,69,96,.55);cursor:pointer;
+  transition:transform .2s,box-shadow .2s,background .2s}
+.btn-partner:hover{transform:translateY(-2px);background:rgba(233,69,96,.28);box-shadow:0 12px 30px rgba(233,69,96,.3)}
+.btn-partner .bp-ic{font-size:20px;font-weight:900;color:var(--red);line-height:1}
+.btn-partner .bp-text{display:flex;flex-direction:column;line-height:1.25}
+.btn-partner .bp-text small{font-size:11px;color:rgba(255,255,255,.6);font-weight:600}
+.btn-partner .bp-text strong{font-size:15px}
+
 /* The badge dot now actually pulses like a live indicator instead of sitting
    there as a dot. */
 .hero-badge .dot{position:relative}
@@ -425,9 +450,9 @@ footer{background:#0a0a1a;padding:60px 0 32px}
   </div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-badge"><span class="dot"></span> Now available across India</div>
-      <h1>India Ka<br><span class="accent">Smart Ride</span><br>Platform</h1>
-      <p class="hero-sub">Book rides in seconds. Track your driver live. Pay your way — cash, UPI, or wallet. Sppero hai toh tension nahi.</p>
+      <div class="hero-badge hero-msg" id="heroBadge"><span class="dot"></span> Now available across India</div>
+      <h1 class="hero-msg" id="heroH1">India Ka<br><span class="accent">Smart Ride</span><br>Platform</h1>
+      <p class="hero-sub hero-msg" id="heroSub">Book rides in seconds. Track your driver live. Pay your way — cash, UPI, or wallet. Sppero hai toh tension nahi.</p>
       <div class="hero-btns">
         <a href="#download" class="btn-store light">
           <span class="store-icon">&#9654;</span>
@@ -436,6 +461,13 @@ footer{background:#0a0a1a;padding:60px 0 32px}
         <a href="#download" class="btn-store dark">
           <span class="store-icon">&#127822;</span>
           <span class="store-text"><small>Download on</small><strong>App Store</strong></span>
+        </a>
+        <!-- Permanent, not part of the rotation. The partner pitch is one of
+             three headlines, so its way in has to be reachable at every moment
+             of the cycle rather than only during its own eight seconds. -->
+        <a href="partner.html" class="btn-partner">
+          <span class="bp-ic">&#8377;</span>
+          <span class="bp-text"><small>Earn with Sppero</small><strong>Become a Partner &#8594;</strong></span>
         </a>
       </div>
       <div class="hero-stats">
@@ -987,6 +1019,55 @@ const HERO_STILL = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   // Leaving must settle back to centre, or the scene stays permanently tilted
   // toward wherever the cursor happened to exit.
   hero.addEventListener('pointerleave', () => { hero.style.setProperty('--mx', '0'); hero.style.setProperty('--my', '0'); });
+})();
+
+/* Rotating hero message. Three pitches share one headline slot: the ride
+   platform, the partner programme, and the driver app.
+
+   Deliberately vague on partner numbers — the split, the thresholds and the
+   terms live on partner.html, and a hero that restates them is a hero that
+   will one day contradict them. The only figure here is the ₹200 withdrawal
+   minimum, which the partner page states too. */
+const HERO_MSGS = [
+  {
+    badge: 'Now available across India',
+    h1: 'India Ka<br><span class="accent">Smart Ride</span><br>Platform',
+    sub: 'Book rides in seconds. Track your driver live. Pay your way — cash, UPI, or wallet. Sppero hai toh tension nahi.',
+  },
+  {
+    badge: 'Partner programme now open',
+    h1: 'Become A<br><span class="accent">Sppero Partner</span><br>&amp; Earn More',
+    sub: 'Bring riders and drivers to Sppero and earn from the rides they take. Free to join, watch your earnings build live, withdraw from ₹200.',
+  },
+  {
+    badge: 'Sppero Buddy — the driver app',
+    h1: 'Drive On<br><span class="accent">Your Own Terms</span><br>Earn Daily',
+    sub: 'Set your own hours, see every rupee as you earn it, and get paid fast — straight to your bank or UPI.',
+  },
+];
+(function heroRotate(){
+  const badge = document.getElementById('heroBadge');
+  const h1    = document.getElementById('heroH1');
+  const sub   = document.getElementById('heroSub');
+  if (!badge || !h1 || !sub) return;
+  // A headline that rewrites itself is motion too. Someone who asked their
+  // system to stop moving things keeps the first message, permanently.
+  if (HERO_STILL) return;
+  const els = [badge, h1, sub];
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % HERO_MSGS.length;
+    const m = HERO_MSGS[i];
+    els.forEach(el => el.classList.add('out'));
+    setTimeout(() => {
+      // The dot is markup, not text — rebuilding the badge without it would
+      // silently drop the pulsing live indicator after the first rotation.
+      badge.innerHTML = '<span class="dot"></span> ' + m.badge;
+      h1.innerHTML = m.h1;
+      sub.textContent = m.sub;
+      els.forEach(el => el.classList.remove('out'));
+    }, 340);   // matches the .hero-msg transition
+  }, 8000);
 })();
 
 /* Stat count-up. Runs on load rather than on scroll — the hero is already in
